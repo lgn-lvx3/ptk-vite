@@ -24,10 +24,9 @@ function App() {
             maxSnack={5}
             autoHideDuration={1500}
         >
-            <Theme dataTheme={theme}>
-                <div className="container mx-auto max-w-4xl">
-                    <BaseSurvey survey={useTrackedStore().app.survey()} />
-                    {/* <div className="max-w-screen-xl mx-auto">
+            <Layout title="Pelvic Toolkit">
+                <BaseSurvey survey={useTrackedStore().app.survey()} />
+                {/* <div className="max-w-screen-xl mx-auto">
                         <main className="flex flex-row sm:mt-6 md:mt-10 lg:mt-20 xl:mt-40 md:justify-center sm:mb-6 md:mb-12 lg:mb-24 xl:mb-48 px-4">
                             <div className="sm:text-center md:text-left lg:text-left justify-center">
                                 <h2 className="text-4xl tracking-tight leading-10 font-extrabold text-gray-900 sm:text-5xl sm:leading-none md:text-6xl">
@@ -58,8 +57,7 @@ function App() {
                             </div>
                         </main>
                     </div> */}
-                </div>
-            </Theme>
+            </Layout>
         </SnackbarProvider>
     )
 }

@@ -1,12 +1,12 @@
 import React, { useState } from "react"
 import { ExclamationCircleIcon } from "@heroicons/react/24/solid"
-import { CalcScore } from "./CalcScore"
+import { SurveyScore } from "./SurveyScore"
 
 type Props = {
     totalScore: number
     resetScore: () => void
 }
-export const CalcDisclaimer = ({ totalScore, resetScore }: Props) => {
+export const SurveyDisclaimer = ({ totalScore, resetScore }: Props) => {
     const [understand, setUnderstand] = useState(false)
 
     return (
@@ -60,7 +60,7 @@ export const CalcDisclaimer = ({ totalScore, resetScore }: Props) => {
                     </span>
                 </div>
             </div>
-            {understand ? <CalcScore totalScore={totalScore} /> : null}
+            {understand ? <SurveyScore totalScore={totalScore} /> : null}
         </div>
     )
 }

@@ -2,22 +2,13 @@ import React, { useEffect } from "react"
 import { ISurvey, Question } from "../utils/types"
 import { Card, Button, Join, Table, Theme, Divider } from "react-daisyui"
 import { actions, store, useTrackedStore } from "state/Store"
-import { CalcDisclaimer } from "./CalcDisclaimer"
+import { SurveyDisclaimer } from "./SurveyDisclaimer"
 
 interface SurveyProps {
     survey: ISurvey | undefined
 }
 
 export const BaseSurvey: React.FC<SurveyProps> = ({ survey }) => {
-    const handleComplete = () => {
-        try {
-            survey?.calculateScore()
-        } catch (err) {
-            // Handle errors in real application!
-            console.log(err)
-        }
-    }
-
     const newSurvey = useTrackedStore().app.survey() ?? survey
     const isComplete = useTrackedStore().app.isComplete()
 
@@ -57,7 +48,7 @@ export const BaseSurvey: React.FC<SurveyProps> = ({ survey }) => {
                 </Card.Body>
             </Card>
             {/* survey questions */}
-            <Card className="card-compact lg:card-normal my-5 shadow-lg">
+            <Card className="card-compact lg:card-normal mt-5 shadow-lg">
                 <Card.Body>
                     {newSurvey.questions.map((question) => (
                         <div
@@ -102,7 +93,7 @@ export const BaseSurvey: React.FC<SurveyProps> = ({ survey }) => {
             {isComplete && (
                 <Card className="card-compact lg:card-normal my-5 shadow-lg">
                     <Card.Body>
-                        <CalcDisclaimer
+                        <SurveyDisclaimer
                             totalScore={0}
                             resetScore={() => console.log("resetting")}
                         />
@@ -110,7 +101,7 @@ export const BaseSurvey: React.FC<SurveyProps> = ({ survey }) => {
                 </Card>
             )}
             {/* post survey */}
-            <Card className="card-compact lg:card-normal my-5 shadow-lg">
+            <Card className="card-compact lg:card-normal mt-5 shadow-lg">
                 <Card.Body>
                     <div className="prose">
                         {newSurvey.postSurvey?.map((section, index) => (

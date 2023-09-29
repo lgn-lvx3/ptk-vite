@@ -1,27 +1,18 @@
-import { Theme } from "react-daisyui"
+import { store } from "state/Store"
+import { Header } from "./Header"
+import { Theme, useTheme } from "react-daisyui"
 
 export const Layout = (props: any) => {
+    const { theme, setTheme } = useTheme(store.app.theme())
     return (
-        <Theme>
-            <div
-                className="flex flex-col min-h-screen justify-between"
-                // style={{
-                //     backgroundImage: "url('/assets/floating-cogs.svg')",
-                //     backgroundSize: "contain",
-                //     backgroundPosition: "center center",
-                //     backgroundRepeat: "repeat",
-                // }}
-            >
-                {/* <Header title={props.title} /> */}
-                <div className="my-auto">
-                    {/* <motion.div initial="exit" animate="enter" exit="exit" variants={animation}> */}
-                    <div className="max-w-screen-xl mx-auto my-10">
-                        {props.children}
-                    </div>
-                    {/* </motion.div> */}
-                </div>
-                {/* <Footer /> */}
+        <Theme dataTheme={theme}>
+            <div className="container w-full mx-auto py-5">
+                <Header title={props.title} />
+                {/* <motion.div initial="exit" animate="enter" exit="exit" variants={animation}> */}
+                {props.children}
+                {/* </motion.div> */}
             </div>
+            {/* <Footer /> */}
         </Theme>
     )
 }

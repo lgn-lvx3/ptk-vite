@@ -3,7 +3,7 @@ import { CheckCircleIcon } from "@heroicons/react/24/solid"
 type Props = {
     totalScore: number
 }
-export const CalcScore = ({ totalScore }: Props) => {
+export const SurveyScore = ({ totalScore }: Props) => {
     return (
         <div className="bg-indigo-600 rounded-md">
             <div className="max-w-screen-xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
