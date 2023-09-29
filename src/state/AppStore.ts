@@ -9,6 +9,8 @@ interface State {
     survey: ISurvey | undefined
     selected: Question[]
     score: number | undefined
+
+    renderPDF: boolean
 }
 
 const initialState: State = {
@@ -19,6 +21,7 @@ const initialState: State = {
     survey: undefined,
     selected: [],
     score: undefined,
+    renderPDF: false,
 }
 
 export const AppStore = createStore("App")(
@@ -34,6 +37,7 @@ export const AppStore = createStore("App")(
             if (survey) {
                 survey.calculateScore()
                 set.score(survey.totalScore)
+                set.renderPDF(true)
             }
         },
         // select the option for a question

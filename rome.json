@@ -7,10 +7,12 @@
         "rules": {
             "recommended": true,
             "a11y": {
-                "noSvgWithoutTitle": "warn"
+                "noSvgWithoutTitle": "warn",
+                "useValidAnchor": "warn"
             },
             "suspicious": {
-                "noExplicitAny": "warn"
+                "noExplicitAny": "warn",
+                "noArrayIndexKey": "warn"
             }
         }
     },

@@ -33,15 +33,18 @@ export const Header: React.FC<Props> = ({ title }) => {
                                 <summary>Parent</summary>
                                 <ul className="p-2">
                                     <Menu.Item>
+                                        {/* rome-ignore lint/a11y/useValidAnchor: <explanation> */}
                                         <a>Submenu 1</a>
                                     </Menu.Item>
                                     <Menu.Item>
+                                        {/* rome-ignore lint/a11y/useValidAnchor: <explanation> */}
                                         <a>Submenu 2</a>
                                     </Menu.Item>
                                 </ul>
                             </details>
                         </Menu.Item>
                         <Menu.Item>
+                            {/* rome-ignore lint/a11y/useValidAnchor: <explanation> */}
                             <a>Item 3</a>
                         </Menu.Item>
                     </Menu>
@@ -75,6 +78,7 @@ export const Header: React.FC<Props> = ({ title }) => {
                         >
                             <Dropdown.Item>Item 1</Dropdown.Item>
                             <li>
+                                {/* rome-ignore lint/a11y/useValidAnchor: <explanation> */}
                                 <a>Parent</a>
                                 <ul className="p-2">
                                     <li>

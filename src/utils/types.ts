@@ -12,6 +12,7 @@ export interface ISurvey {
     references?: string[]
 
     totalScore: number | undefined
+    maxScore: number | undefined
 
     questionList: string[]
     questions: Question[]
@@ -116,6 +117,7 @@ export class UDI6Survey implements ISurvey {
     ]
 
     totalScore: number | undefined
+    maxScore = 100
 
     questions: Question[]
     selected: Question[]

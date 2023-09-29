@@ -5,15 +5,9 @@ import { Theme, useTheme } from "react-daisyui"
 import { actions, store, useTrackedStore } from "state/Store"
 import { BaseSurvey } from "./BaseSurvey"
 import { UDI6Survey } from "utils/types"
-const randoms = [
-    [1, 2],
-    [3, 4, 5],
-    [6, 7],
-]
 
 function App() {
     const { theme, setTheme } = useTheme(store.app.theme())
-
     actions.app.survey(new UDI6Survey())
 
     // set the theme to dark mode
@@ -25,7 +19,11 @@ function App() {
             autoHideDuration={1500}
         >
             <Layout title="Pelvic Toolkit">
-                <BaseSurvey survey={useTrackedStore().app.survey()} />
+                <div className="flex flex-1 flex-row">
+                    <div className="flex flex-1">
+                        <BaseSurvey survey={useTrackedStore().app.survey()} />
+                    </div>
+                </div>
                 {/* <div className="max-w-screen-xl mx-auto">
                         <main className="flex flex-row sm:mt-6 md:mt-10 lg:mt-20 xl:mt-40 md:justify-center sm:mb-6 md:mb-12 lg:mb-24 xl:mb-48 px-4">
                             <div className="sm:text-center md:text-left lg:text-left justify-center">

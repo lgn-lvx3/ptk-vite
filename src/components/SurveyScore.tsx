@@ -1,4 +1,5 @@
 import { CheckCircleIcon } from "@heroicons/react/24/solid"
+import { Button } from "react-daisyui"
 
 type Props = {
     totalScore: number
@@ -20,14 +21,6 @@ export const SurveyScore = ({ totalScore }: Props) => {
                                 Your Score: {totalScore}/100
                             </span>
                         </p>
-                    </div>
-                    <div className="order-3 mt-2 flex-shrink-0 sm:order-2 xs:mt-20 sm:w-auto">
-                        <div className="rounded-md shadow-sm">
-                            {/* rome-ignore lint/a11y/useValidAnchor: <explanation> */}
-                            <a className="flex items-center justify-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-indigo-600 bg-white hover:text-indigo-500 focus:outline-none focus:shadow-outline transition ease-in-out duration-150">
-                                Email Score
-                            </a>
-                        </div>
                     </div>
                 </div>
             </div>
