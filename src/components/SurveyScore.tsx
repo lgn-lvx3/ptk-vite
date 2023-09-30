@@ -6,15 +6,15 @@ import { PDFDownloadLink, pdf } from "@react-pdf/renderer"
 import { Alert, Button } from "react-daisyui"
 import { PDFSurvey } from "./PDFSurvey"
 import { ISurvey } from "state/ISurvey/ISurvey"
-import { useState } from "react"
+import { useSnackbar } from "notistack"
 
 type Props = {
     survey: ISurvey | undefined
 }
 
 export const SurveyScore = ({ survey }: Props) => {
-    const [blob, setBlob] = useState<Blob | null>(null)
-
+    // notistack
+    const { enqueueSnackbar, closeSnackbar } = useSnackbar()
     //
     return (
         <Alert
@@ -32,13 +32,8 @@ export const SurveyScore = ({ survey }: Props) => {
                 <PDFDownloadLink
                     document={<PDFSurvey />}
                     fileName={`${survey?.title}.pdf`}
-                    onClick={async () => {
-                        console.log("onClick")
-                    }}
                 >
-                    {({ blob, url, loading, error }) =>
-                        loading ? "Loading document..." : "Download"
-                    }
+                    Download
                 </PDFDownloadLink>
             </Button>
 
@@ -46,29 +41,41 @@ export const SurveyScore = ({ survey }: Props) => {
                 color="neutral"
                 endIcon={<ArrowUpOnSquareIcon className="h-5 w-5" />}
                 onClick={async () => {
-                    const blob = await pdf(<PDFSurvey />).toBlob()
-                    console.log("attempting to share")
-                    if (navigator?.share) {
-                        console.log("navigator.share")
-                        navigator
-                            .share({
-                                title: `${survey?.title} Results`,
-                                files: [
-                                    new File([blob], `${survey?.title}.pdf`, {
-                                        type: "application/pdf",
-                                    }),
-                                ],
-                            })
-                            .then(() => console.log("Successful share"))
-                            .catch((error) =>
-                                console.log("Error sharing", error),
-                            )
+                    try {
+                        const pdfBlob = await pdf(<PDFSurvey />).toBlob()
+                        if (!navigator?.share) {
+                            // throw snackbar error
+
+                            throw new Error("Sharing not supported by browser.")
+                        }
+
+                        const pdfFile = new File(
+                            [pdfBlob],
+                            `${survey?.title}.pdf`,
+                            {
+                                type: "application/pdf",
+                            },
+                        )
+
+                        if (!navigator?.canShare({ files: [pdfFile] })) {
+                            throw new Error("Browser cannot share file.")
+                        }
+
+                        console.log("attempting to share", pdfFile)
+
+                        await navigator.share({
+                            title: `${survey?.title} Results`,
+                            files: [pdfFile],
+                        })
+                    } catch (error: any) {
+                        enqueueSnackbar(error.message, {
+                            variant: "error",
+                        })
                     }
                 }}
             >
                 Share
             </Button>
-            {/* </PDFDownloadLink> */}
         </Alert>
     )
 }
