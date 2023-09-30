@@ -22,7 +22,7 @@ export const SurveyDisclaimer = ({ survey }: Props) => {
             <Alert
                 icon={
                     <ExclamationCircleIcon
-                        className="mr-3 h-8 w-8"
+                        className="mr-3 h-8 w-8 invisible md:visible"
                         aria-hidden="true"
                     />
                 }

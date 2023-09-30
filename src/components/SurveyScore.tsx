@@ -19,7 +19,10 @@ export const SurveyScore = ({ survey }: Props) => {
     return (
         <Alert
             icon={
-                <CheckCircleIcon className="mr-3 h-8 w-8" aria-hidden="true" />
+                <CheckCircleIcon
+                    className="mr-3 h-8 w-8 invisible md:visible"
+                    aria-hidden="true"
+                />
             }
         >
             <div className="prose">
