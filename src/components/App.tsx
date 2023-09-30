@@ -4,7 +4,7 @@ import { Layout } from "./Layout"
 import { Theme, useTheme } from "react-daisyui"
 import { actions, store, useTrackedStore } from "state/Store"
 import { BaseSurvey } from "./BaseSurvey"
-import { UDI6Survey } from "utils/types"
+import { UDI6Survey } from "state/ISurvey/UDI6Survey"
 
 function App() {
     const { theme, setTheme } = useTheme(store.app.theme())
@@ -19,11 +19,7 @@ function App() {
             autoHideDuration={1500}
         >
             <Layout title="Pelvic Toolkit">
-                <div className="flex flex-1 flex-row">
-                    <div className="flex flex-1">
-                        <BaseSurvey survey={useTrackedStore().app.survey()} />
-                    </div>
-                </div>
+                <BaseSurvey survey={useTrackedStore().app.survey()} />
                 {/* <div className="max-w-screen-xl mx-auto">
                         <main className="flex flex-row sm:mt-6 md:mt-10 lg:mt-20 xl:mt-40 md:justify-center sm:mb-6 md:mb-12 lg:mb-24 xl:mb-48 px-4">
                             <div className="sm:text-center md:text-left lg:text-left justify-center">

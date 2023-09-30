@@ -6,7 +6,7 @@ export const Layout = (props: any) => {
     const { theme, setTheme } = useTheme(store.app.theme())
     return (
         <Theme dataTheme={theme}>
-            <div className="container w-full mx-auto py-5">
+            <div className="container mx-auto py-5 max-w-4xl px-0 md:px-5">
                 <Header title={props.title} />
                 {/* <motion.div initial="exit" animate="enter" exit="exit" variants={animation}> */}
                 {props.children}

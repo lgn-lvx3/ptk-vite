@@ -20,7 +20,7 @@ export const PDFSurvey: React.FC = () => {
             color: "#4B5563",
         },
         body: { marginTop: 35, marginBottom: 60, paddingHorizontal: 35 },
-        h3: { fontSize: 18, marginTop: 15, fontWeight: "bold" },
+        h3: { fontSize: 18, marginTop: 25, fontWeight: "bold" },
         p: { fontSize: 14, marginVertical: 15 },
         answerRow: {
             display: "flex",

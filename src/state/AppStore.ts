@@ -1,5 +1,6 @@
 import { createStore } from "@udecode/zustood"
-import { ISurvey, Question, Option } from "utils/types"
+import { IQuestion, IOption } from "state/ISurvey/ISurvey"
+import { ISurvey } from "state/ISurvey/ISurvey"
 import { s } from "vitest/dist/reporters-5f784f42.js"
 interface State {
     theme: "light" | "dark"
@@ -7,7 +8,7 @@ interface State {
     surveyCompleted: boolean
     disclaimerAccepted: boolean
     survey: ISurvey | undefined
-    selected: Question[]
+    selected: IQuestion[]
     score: number | undefined
 
     renderPDF: boolean
@@ -42,7 +43,7 @@ export const AppStore = createStore("App")(
         },
         // select the option for a question
         // if the question is already selected, replace the selected option
-        upsertOption: (question: Question, option: Option) => {
+        upsertOption: (question: IQuestion, option: IOption) => {
             // if exists in selected, replace
             question.selectedOption = option
 
@@ -62,7 +63,7 @@ export const AppStore = createStore("App")(
         },
     }))
     .extendSelectors((set, get, api) => ({
-        isSelected: (option: Option) => {
+        isSelected: (option: IOption) => {
             const selected = get.selected()
             // console.log("isSelected", selected)
 

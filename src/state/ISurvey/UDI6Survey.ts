@@ -1,87 +1,14 @@
 import { getUniqueNumber } from "utils"
+import { ISurvey, ISurveySection, IQuestion, IOption } from "./ISurvey"
 
-export interface ISurvey {
-    title: string
-    subtitle: string
-    instructions: ISurveyInstruction
-
-    postSurvey?: ISurveySection[]
-
-    interpretation?: string[]
-    scoring?: string[]
-    references?: string[]
-
-    totalScore: number | undefined
-    maxScore: number | undefined
-
-    questionList: string[]
-    questions: Question[]
-    selected: Question[]
-
-    completed: boolean
-
-    calculateScore(): void
-    selectOption(question: Question, option: Option): void
-}
-
-export interface ICompletedSurvey {
-    survey: ISurvey
-    completed: true
-    date: Date
-    score: number
-    id: string
-    uid: string
-}
-
-export type UDI6_OPTIONS =
-    | ["Not at all", 0]
-    | ["A little bit", 1]
-    | ["Moderately", 2]
-    | ["Greatly", 3]
-
-export interface Option {
-    id: number
-    optionTuple: [string, number]
-}
-
-export interface Question {
-    id: number
-    text: string
-    selectedOption: Option | undefined
-    options: Option[]
-}
-
-export interface ISurveyInstruction {
-    text: string
-    timePeriod: string
-}
-
-export interface ISurveySection {
-    title?: string
-    values: string[]
-}
-
-export class UDI6Question implements Question {
-    id: number
-    text: string
-    selectedOption: Option | undefined
-    options: Option[]
-    constructor(id: number, question: string, options: Option[]) {
-        this.id = id
-        this.text = question
-        this.options = options
-    }
-}
-
-export class UDI6Option implements Option {
-    id: number
-    optionTuple: UDI6_OPTIONS
-    constructor(optionText: UDI6_OPTIONS) {
-        this.id = getUniqueNumber()
-        this.optionTuple = optionText
-    }
-}
-
+/**
+ * @description Implementation of the UDI-6 survey.
+ * @author Logan Hendershot
+ * @date 09/29/2023
+ * @export
+ * @class UDI6Survey
+ * @implements {ISurvey}
+ */
 export class UDI6Survey implements ISurvey {
     title = "udi-6"
     subtitle = "urogenital distress inventory"
@@ -90,10 +17,6 @@ export class UDI6Survey implements ISurvey {
         text: "For each question, select the value that best describes this problem for you",
         timePeriod: "over the past month",
     }
-
-    preSurvey = new Array<ISurveySection>()
-
-    postSurvey = new Array<ISurveySection>()
 
     references = [
         "Uebersax JS, Wyman JF, Shumaker SA, McClish DK, Fantl JA, Continence Program for Women Research Group. Short Forms to Assess Life Quality and Symptom Distress for Urinary Incontinence in Women: The Incontinence Impact Questionnaire and the Urogenital Distress Inventory. Neurourology and Urodynamics. 1995;14: 131-39.",
@@ -116,12 +39,15 @@ export class UDI6Survey implements ISurvey {
         "Each item is scored between 0 (no problem) to 3 (bothered greatly). All scores are summed and multiplied by 6, then multiplied by 25 for the scale score.",
     ]
 
+    preSurvey = new Array<ISurveySection>()
+    postSurvey = new Array<ISurveySection>()
+
     totalScore: number | undefined
     maxScore = 100
 
-    questions: Question[]
-    selected: Question[]
-    completed: boolean
+    questions: IQuestion[] = []
+    selected: IQuestion[] = []
+    completed = false
 
     constructor() {
         // for each of the questions in question source, create a new question
@@ -155,10 +81,6 @@ export class UDI6Survey implements ISurvey {
             title: "References",
             values: [this.references[0]],
         })
-
-        this.selected = []
-        this.totalScore = undefined
-        this.completed = false
     }
 
     calculateScore(): void {
@@ -186,7 +108,7 @@ export class UDI6Survey implements ISurvey {
         this.completed = true
     }
 
-    selectOption(question: Question, option: Option): void {
+    selectOption(question: IQuestion, option: IOption): void {
         // if exists in selected, replace
         question.selectedOption = option
 
@@ -197,5 +119,49 @@ export class UDI6Survey implements ISurvey {
         } else {
             this.selected.push(question)
         }
+    }
+}
+
+/**
+ * Represents the possible options for a UDI6Question.
+ */
+export type UDI6_OPTIONS =
+    | ["Not at all", 0]
+    | ["A little bit", 1]
+    | ["Moderately", 2]
+    | ["Greatly", 3]
+
+export class UDI6Option implements IOption {
+    id: number
+    optionTuple: UDI6_OPTIONS
+    constructor(optionText: UDI6_OPTIONS) {
+        this.id = getUniqueNumber()
+        this.optionTuple = optionText
+    }
+}
+
+/**
+ * Represents a question in the UDI6 survey.
+ */
+export class UDI6Question implements IQuestion {
+    /** The unique identifier for the question. */
+    id: number
+    /** The text of the question. */
+    text: string
+    /** The currently selected option for the question. */
+    selectedOption: IOption | undefined
+    /** The available options for the question. */
+    options: IOption[]
+
+    /**
+     * Creates a new UDI6Question instance.
+     * @param id - The unique identifier for the question.
+     * @param question - The text of the question.
+     * @param options - The available options for the question.
+     */
+    constructor(id: number, question: string, options: IOption[]) {
+        this.id = id
+        this.text = question
+        this.options = options
     }
 }
