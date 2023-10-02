@@ -1,14 +1,8 @@
 import { SnackbarProvider } from "notistack"
-import * as React from "react"
-import * as ReactDOM from "react-dom/client"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
-import { Layout } from "./navigation/Layout"
-
-import { Theme, useTheme } from "react-daisyui"
-import { actions, store, useTrackedStore } from "state/Store"
-import { BaseSurvey } from "./components/BaseSurvey"
-import { UDI6Survey } from "state/ISurvey/UDI6Survey"
+import { useTheme } from "react-daisyui"
+import { store } from "state/Store"
 import { ErrorPage } from "navigation/ErrorPage"
 import { UDI6Page } from "navigation/UDI6Page"
 import { Root } from "navigation/Root"

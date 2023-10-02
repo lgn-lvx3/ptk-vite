@@ -1,5 +1,6 @@
 import React from "react"
 import { Navbar, Dropdown, Button, Menu, Avatar } from "react-daisyui"
+import { Link } from "react-router-dom"
 
 import logo from "/src/assets/logo.png"
 
@@ -12,17 +13,21 @@ export const Header: React.FC<Props> = ({ title }) => {
         <header>
             <Navbar className="flex flex-1 w-full bg-base-100 shadow-lg rounded-lg mb-10">
                 <Navbar.Start>
-                    <Avatar
-                        src={logo}
-                        size="sm"
-                        innerClassName="rounded bg-primary p-2"
-                    />
+                    <Link to="/">
+                        <Avatar
+                            src={logo}
+                            size="sm"
+                            innerClassName="rounded bg-primary p-2"
+                        />
+                    </Link>
                 </Navbar.Start>
                 <Navbar.Center className="hidden lg:flex">
                     <Menu horizontal className="px-1">
                         <Menu.Item>
-                            {/* rome-ignore lint/a11y/useValidAnchor: <explanation> */}
-                            <a onClick={() => console.log("hello")}>UDI-6</a>
+                            <Link to="surveys/udi6">UDI-6</Link>
+                        </Menu.Item>
+                        <Menu.Item>
+                            <Link to="surveys/udi6">UDI-6</Link>
                         </Menu.Item>
                         <Menu.Item>
                             <details>

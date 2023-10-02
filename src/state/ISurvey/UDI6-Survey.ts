@@ -13,10 +13,8 @@ export class UDI6Survey implements ISurvey {
     title = "udi-6"
     subtitle = "urogenital distress inventory"
 
-    instructions = {
-        text: "For each question, select the value that best describes this problem for you",
-        timePeriod: "over the past month",
-    }
+    instructions =
+        "For each question, select the value that best describes this problem for you over the past month"
 
     references = [
         "Uebersax JS, Wyman JF, Shumaker SA, McClish DK, Fantl JA, Continence Program for Women Research Group. Short Forms to Assess Life Quality and Symptom Distress for Urinary Incontinence in Women: The Incontinence Impact Questionnaire and the Urogenital Distress Inventory. Neurourology and Urodynamics. 1995;14: 131-39.",

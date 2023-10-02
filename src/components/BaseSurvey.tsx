@@ -39,12 +39,7 @@ export const BaseSurvey: React.FC = () => {
                         </Card.Title>
                         <div className="prose mt-10">
                             <h3>Instructions</h3>
-                            <p>
-                                {survey.instructions.text}{" "}
-                                <strong>
-                                    {survey.instructions.timePeriod}.
-                                </strong>
-                            </p>
+                            <p>{survey.instructions}</p>
                         </div>
                     </Card.Body>
                 </Card>

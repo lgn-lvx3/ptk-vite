@@ -7,7 +7,7 @@ export interface ISurvey {
     /** The subtitle of the survey. */
     subtitle: string
     /** The instructions for the survey. */
-    instructions: ISurveyInstruction
+    instructions?: JSX.Element | string
 
     /** The post-survey sections. */
     postSurvey?: ISurveySection[]
@@ -50,12 +50,7 @@ export interface ISurveyInstruction {
     /**
      * The text of the instruction.
      */
-    text: string
-
-    /**
-     * The time period for the instruction.
-     */
-    timePeriod: string
+    text: JSX.Element | string
 }
 
 /**

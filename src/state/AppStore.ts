@@ -15,7 +15,7 @@ interface State {
 }
 
 const initialState: State = {
-    theme: "dark",
+    theme: "light",
     surveyInProgress: false,
     surveyCompleted: false,
     disclaimerAccepted: false,
