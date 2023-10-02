@@ -1,23 +1,12 @@
 import React, { useEffect, useRef } from "react"
-import { ISurvey } from "state/ISurvey/ISurvey"
 import { Card, Button, Join, Theme } from "react-daisyui"
 import { actions, store, useTrackedStore } from "state/Store"
 import { SurveyDisclaimer } from "./SurveyDisclaimer"
 import autoAnimate from "@formkit/auto-animate"
 
-interface SurveyProps {
-    survey: ISurvey | undefined
-}
-
-export const BaseSurvey: React.FC<SurveyProps> = ({ survey }) => {
-    const newSurvey = useTrackedStore().app.survey() ?? survey
+export const BaseSurvey: React.FC = () => {
+    const survey = useTrackedStore().app.survey()
     const isComplete = useTrackedStore().app.isComplete()
-
-    if (newSurvey) {
-        survey = newSurvey
-    } else {
-        return <></>
-    }
 
     useEffect(() => {
         if (isComplete) {
@@ -25,10 +14,16 @@ export const BaseSurvey: React.FC<SurveyProps> = ({ survey }) => {
         }
     }, [isComplete])
 
+    const isSelected = store.app.isSelected
+
     const parent = useRef(null)
     useEffect(() => {
         parent.current && autoAnimate(parent.current)
     }, [parent])
+
+    if (!survey) {
+        return <></>
+    }
 
     return (
         <Theme dataTheme={store.app.theme()}>
@@ -37,17 +32,17 @@ export const BaseSurvey: React.FC<SurveyProps> = ({ survey }) => {
                 <Card className="mb-5 shadow-lg">
                     <Card.Body>
                         <Card.Title className="uppercase">
-                            {newSurvey.title}
+                            {survey.title}
                         </Card.Title>
                         <Card.Title className="uppercase text-sm text-slate-400">
-                            {newSurvey.subtitle}
+                            {survey.subtitle}
                         </Card.Title>
                         <div className="prose mt-10">
                             <h3>Instructions</h3>
                             <p>
-                                {newSurvey.instructions.text}{" "}
+                                {survey.instructions.text}{" "}
                                 <strong>
-                                    {newSurvey.instructions.timePeriod}.
+                                    {survey.instructions.timePeriod}.
                                 </strong>
                             </p>
                         </div>
@@ -56,7 +51,7 @@ export const BaseSurvey: React.FC<SurveyProps> = ({ survey }) => {
                 {/* survey questions */}
                 <Card className="card-compact lg:card-normal mt-5 shadow-lg">
                     <Card.Body>
-                        {newSurvey.questions.map((question) => (
+                        {survey.questions.map((question) => (
                             <div
                                 key={question.id}
                                 className="flex flex-1 flex-col md:flex-row gap-5 justify-start items-center my-5 border-spacing-y-1"
@@ -72,9 +67,7 @@ export const BaseSurvey: React.FC<SurveyProps> = ({ survey }) => {
                                             <Button
                                                 key={option.id}
                                                 color={
-                                                    useTrackedStore().app.isSelected(
-                                                        option,
-                                                    )
+                                                    isSelected(option)
                                                         ? "primary"
                                                         : undefined
                                                 }
@@ -98,7 +91,7 @@ export const BaseSurvey: React.FC<SurveyProps> = ({ survey }) => {
                 {isComplete && (
                     <Card className="card-compact lg:card-normal my-5 shadow-lg">
                         <Card.Body>
-                            <SurveyDisclaimer survey={newSurvey} />
+                            <SurveyDisclaimer survey={survey} />
                         </Card.Body>
                     </Card>
                 )}
@@ -106,7 +99,7 @@ export const BaseSurvey: React.FC<SurveyProps> = ({ survey }) => {
                 <Card className="card-compact lg:card-normal mt-5 shadow-lg">
                     <Card.Body>
                         <div className="prose">
-                            {newSurvey.postSurvey?.map((section, index) => (
+                            {survey.postSurvey?.map((section, index) => (
                                 <div key={section.title}>
                                     <h2>{section.title}</h2>
                                     {section.values.map((question, index) => (

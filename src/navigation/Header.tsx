@@ -17,16 +17,12 @@ export const Header: React.FC<Props> = ({ title }) => {
                         size="sm"
                         innerClassName="rounded bg-primary p-2"
                     />
-                    {/* rome-ignore lint/a11y/useValidAnchor: <explanation> */}
-                    {/* <a className="btn btn-ghost normal-case text-xl">
-                        Pelvic Toolkit Calculators
-                    </a> */}
                 </Navbar.Start>
                 <Navbar.Center className="hidden lg:flex">
                     <Menu horizontal className="px-1">
                         <Menu.Item>
                             {/* rome-ignore lint/a11y/useValidAnchor: <explanation> */}
-                            <a>Item 1</a>
+                            <a onClick={() => console.log("hello")}>UDI-6</a>
                         </Menu.Item>
                         <Menu.Item>
                             <details>

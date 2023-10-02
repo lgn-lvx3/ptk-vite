@@ -15,7 +15,7 @@ interface State {
 }
 
 const initialState: State = {
-    theme: "light",
+    theme: "dark",
     surveyInProgress: false,
     surveyCompleted: false,
     disclaimerAccepted: false,
@@ -73,7 +73,6 @@ export const AppStore = createStore("App")(
             else return false
         },
         isComplete: () => {
-            const selected = get.selected()
             // console.log("isSelected", selected)
             if (get.selected().length === get.survey()?.questions.length) {
                 return true

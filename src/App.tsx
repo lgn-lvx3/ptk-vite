@@ -1,14 +1,34 @@
 import { SnackbarProvider } from "notistack"
-import { Layout } from "./Layout"
+import * as React from "react"
+import * as ReactDOM from "react-dom/client"
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
+
+import { Layout } from "./navigation/Layout"
 
 import { Theme, useTheme } from "react-daisyui"
 import { actions, store, useTrackedStore } from "state/Store"
-import { BaseSurvey } from "./BaseSurvey"
+import { BaseSurvey } from "./components/BaseSurvey"
 import { UDI6Survey } from "state/ISurvey/UDI6Survey"
+import { ErrorPage } from "navigation/ErrorPage"
+import { UDI6Page } from "navigation/UDI6Page"
+import { Root } from "navigation/Root"
+
+const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <Root />,
+        errorElement: <ErrorPage />,
+        children: [
+            {
+                path: "surveys/udi6",
+                element: <UDI6Page />,
+            },
+        ],
+    },
+])
 
 function App() {
     const { theme, setTheme } = useTheme(store.app.theme())
-    actions.app.survey(new UDI6Survey())
 
     // set the theme to dark mode
     return (
@@ -18,9 +38,9 @@ function App() {
             maxSnack={5}
             autoHideDuration={1500}
         >
-            <Layout title="Pelvic Toolkit">
-                <BaseSurvey survey={useTrackedStore().app.survey()} />
-                {/* <div className="max-w-screen-xl mx-auto">
+            <RouterProvider router={router} />
+            {/* <BaseSurvey survey={useTrackedStore().app.survey()} /> */}
+            {/* <div className="max-w-screen-xl mx-auto">
                         <main className="flex flex-row sm:mt-6 md:mt-10 lg:mt-20 xl:mt-40 md:justify-center sm:mb-6 md:mb-12 lg:mb-24 xl:mb-48 px-4">
                             <div className="sm:text-center md:text-left lg:text-left justify-center">
                                 <h2 className="text-4xl tracking-tight leading-10 font-extrabold text-gray-900 sm:text-5xl sm:leading-none md:text-6xl">
@@ -51,7 +71,6 @@ function App() {
                             </div>
                         </main>
                     </div> */}
-            </Layout>
         </SnackbarProvider>
     )
 }
