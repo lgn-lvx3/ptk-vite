@@ -3,6 +3,7 @@ import { Navbar, Dropdown, Button, Menu, Avatar } from "react-daisyui"
 import { Link } from "react-router-dom"
 
 import logo from "/src/assets/logo.png"
+import { LanguageDropdown } from "components/LanguageDropdown"
 
 interface Props {
     title: string
@@ -73,25 +74,7 @@ export const Header: React.FC<Props> = ({ title }) => {
                                 />
                             </svg>
                         </Button>
-                        <Dropdown.Menu
-                            tabIndex={0}
-                            className="w-52 menu-sm mt-3 z-[1]"
-                        >
-                            <Dropdown.Item>Item 1</Dropdown.Item>
-                            <li>
-                                {/* rome-ignore lint/a11y/useValidAnchor: <explanation> */}
-                                <a>Parent</a>
-                                <ul className="p-2">
-                                    <li>
-                                        <a>Submenu 1</a>
-                                    </li>
-                                    <li>
-                                        <a>Submenu 2</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <Dropdown.Item>Item 3</Dropdown.Item>
-                        </Dropdown.Menu>
+                        <LanguageDropdown />
                     </Dropdown>
                 </Navbar.End>
             </Navbar>

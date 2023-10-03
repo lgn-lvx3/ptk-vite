@@ -18,7 +18,7 @@ export class IIQSurvey implements ISurvey {
     instructions =
         "Some people find that accidental urine loss may affect their activities, relationships, and feelings. The questions below refer to areas in your life that may have been influenced or changed by your problem. For each question, circle the response that best describes how much your activities, relationships, and feelings are being affected by urine leakage. Has urine leakage affected your:"
 
-    questionPrompt = [
+    questionPrompts = [
         "Ability to do household chores (cooking, housecleaning, laundry)?",
         "Physical recreation such as walking, swimming, or other exercise?",
         "Entertainment activities (movies, concerts, etc.)?",
@@ -47,17 +47,17 @@ export class IIQSurvey implements ISurvey {
     preSurvey = new Array<ISurveySection>()
     postSurvey = new Array<ISurveySection>()
 
-    totalScore: number | undefined
+    completedScore: number | undefined
     maxScore = 100
 
-    questions: IQuestion[] = []
+    questionSets: IQuestion[] = []
     selected: IQuestion[] = []
     completed = false
 
     constructor() {
         // for each of the questions in question source, create a new question
         // with the question text and options
-        this.questions = this.questionPrompt.map((question) => {
+        this.questionSets = this.questionPrompts.map((question) => {
             return new POPDI6Question(getUniqueNumber(), question, [
                 new POPDI6Option(["Not Present", 0]),
                 new POPDI6Option(["Not at all", 1]),
@@ -69,11 +69,11 @@ export class IIQSurvey implements ISurvey {
 
         this.postSurvey.push({
             title: "Interpretation",
-            values: [this.interpretation[0]],
+            content: [this.interpretation[0]],
         })
         this.postSurvey.push({
             title: "Scoring",
-            values: [this.scoring[0]],
+            content: [this.scoring[0]],
         })
         // this.postSurvey.push({
         //     title: "Minimum Important Difference (MID)",
@@ -90,33 +90,33 @@ export class IIQSurvey implements ISurvey {
     }
 
     calculateScore(): void {
-        if (this.selected.length !== this.questions.length) {
+        if (this.selected.length !== this.questionSets.length) {
             throw new Error("Not all questions have been answered")
         }
 
         // calculate the total score by summing the scores of the selected options
-        this.totalScore = this.selected.reduce((acc, curr) => {
-            if (!curr.selectedOption) {
+        this.completedScore = this.selected.reduce((acc, curr) => {
+            if (!curr.selectedAnswer) {
                 throw new Error("Not all questions have been answered")
             }
-            return acc + (curr.selectedOption.optionTuple[1] || 0)
+            return acc + (curr.selectedAnswer.optionTuple[1] || 0)
         }, 0)
 
         // calculate the average
-        this.totalScore = this.totalScore / this.selected.length
+        this.completedScore = this.completedScore / this.selected.length
 
         // convert to % of 100
-        this.totalScore = this.totalScore * 25
+        this.completedScore = this.completedScore * 25
 
         // round it to the nearest integer
-        this.totalScore = Math.round(this.totalScore)
+        this.completedScore = Math.round(this.completedScore)
 
         this.completed = true
     }
 
     selectOption(question: IQuestion, option: IOption): void {
         // if exists in selected, replace
-        question.selectedOption = option
+        question.selectedAnswer = option
 
         // if the question is already selected, replace the selected option
         const index = this.selected.findIndex((q) => q.id === question.id)
@@ -154,9 +154,9 @@ export class POPDI6Question implements IQuestion {
     /** The unique identifier for the question. */
     id: number
     /** The text of the question. */
-    text: string
+    prompt: string
     /** The currently selected option for the question. */
-    selectedOption: IOption | undefined
+    selectedAnswer: IOption | undefined
     /** The available options for the question. */
     options: IOption[]
 
@@ -168,7 +168,7 @@ export class POPDI6Question implements IQuestion {
      */
     constructor(id: number, question: string, options: IOption[]) {
         this.id = id
-        this.text = question
+        this.prompt = question
         this.options = options
     }
 }

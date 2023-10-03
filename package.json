@@ -26,6 +26,7 @@
         "@heroicons/react": "2.0.18",
         "@react-pdf/renderer": "3.1.12",
         "@udecode/zustood": "2.0.0",
+        "i18n-js": "4.3.2",
         "localforage": "1.10.0",
         "match-sorter": "6.3.1",
         "notistack": "3.0.1",

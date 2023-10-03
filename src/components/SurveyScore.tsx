@@ -3,16 +3,69 @@ import {
     ArrowUpOnSquareIcon,
 } from "@heroicons/react/24/outline"
 import { PDFDownloadLink, pdf } from "@react-pdf/renderer"
-import { Alert, Button } from "react-daisyui"
+import { Button } from "react-daisyui"
 import { PDFSurvey } from "./PDFSurvey"
-import { ISurvey } from "state/ISurvey/ISurvey"
 import { useSnackbar } from "notistack"
+
+import React, { useEffect, useRef, useState } from "react"
+import { ExclamationCircleIcon } from "@heroicons/react/24/solid"
+import { Alert, Form, Toggle } from "react-daisyui"
+
+import autoAnimate from "@formkit/auto-animate"
+import { ISurvey } from "state/ISurvey/ISurvey"
+import { translate } from "utils/i18n"
 
 type Props = {
     survey: ISurvey | undefined
 }
 
 export const SurveyScore = ({ survey }: Props) => {
+    const [understand, setUnderstand] = useState(false)
+    const parent = useRef(null)
+
+    const disclaimerText = translate("disclaimer")
+    useEffect(() => {
+        parent.current && autoAnimate(parent.current)
+    }, [parent])
+
+    return (
+        <div ref={parent}>
+            <Alert
+                icon={
+                    <ExclamationCircleIcon
+                        className="mr-3 h-8 w-8 invisible md:visible"
+                        aria-hidden="true"
+                    />
+                }
+            >
+                <div className="prose">
+                    <p>{translate("disclaimer.text")}</p>
+                </div>
+            </Alert>
+
+            <div className="flex items-center">
+                <Form className="p-4">
+                    <Form.Label title={translate("disclaimer.understand")}>
+                        <Toggle
+                            checked={understand}
+                            onChange={() => {
+                                setUnderstand(!understand)
+                                if (understand) {
+                                    // resetScore()
+                                }
+                            }}
+                            className="m-2"
+                            color="primary"
+                        />
+                    </Form.Label>
+                </Form>
+            </div>
+            {understand ? <SurveyResults survey={survey} /> : null}
+        </div>
+    )
+}
+
+const SurveyResults = ({ survey }: Props) => {
     // notistack
     const { enqueueSnackbar, closeSnackbar } = useSnackbar()
     //
@@ -27,7 +80,7 @@ export const SurveyScore = ({ survey }: Props) => {
         >
             <div className="prose">
                 <h1 className="text-success-content">
-                    Score: {survey?.totalScore} / {survey?.maxScore}
+                    Score: {survey?.completedScore} / {survey?.maxScore}
                 </h1>
             </div>
 
@@ -36,7 +89,7 @@ export const SurveyScore = ({ survey }: Props) => {
                     document={<PDFSurvey />}
                     fileName={`${survey?.title}.pdf`}
                 >
-                    Download
+                    {translate("download")}
                 </PDFDownloadLink>
             </Button>
 
@@ -77,7 +130,7 @@ export const SurveyScore = ({ survey }: Props) => {
                     }
                 }}
             >
-                Share
+                {translate("share")}
             </Button>
         </Alert>
     )

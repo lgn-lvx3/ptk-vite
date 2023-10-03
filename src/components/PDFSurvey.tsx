@@ -1,6 +1,15 @@
 import React from "react"
-import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer"
+import {
+    Document,
+    Page,
+    Text,
+    View,
+    StyleSheet,
+    Image,
+} from "@react-pdf/renderer"
 import { store } from "state/Store"
+
+import logo from "/src/assets/logo.png"
 
 export const PDFSurvey: React.FC = () => {
     const survey = store.app.survey()
@@ -56,14 +65,20 @@ export const PDFSurvey: React.FC = () => {
                     {/* pre survey */}
                     <Text style={styles.title}>{survey.title}</Text>
                     <Text style={styles.subtitle}>{survey.subtitle}</Text>
+                    <Text style={styles.subtitle}>ID: {survey.id}</Text>
+                    <Text style={styles.subtitle}>
+                        {survey.created.toLocaleString()}
+                    </Text>
+
                     <View>
                         <Text style={styles.h3}>Instructions</Text>
-                        <Text style={styles.p}>
-                            {survey.instructions.text}{" "}
-                            <Text style={styles.option}>
-                                {survey.instructions.timePeriod}.
-                            </Text>
-                        </Text>
+                        {survey.questionSets.map((val) => {
+                            return (
+                                <Text key={val.id} style={styles.p}>
+                                    {val.instructions}
+                                </Text>
+                            )
+                        })}
                     </View>
                     <View style={styles.answerRow}>
                         <Text style={styles.question}>Question</Text>
@@ -73,12 +88,14 @@ export const PDFSurvey: React.FC = () => {
                     {/* survey questions */}
                     {survey.selected.map((question) => (
                         <View key={question.id} style={styles.answerRow}>
-                            <Text style={styles.question}>{question.text}</Text>
+                            <Text style={styles.question}>
+                                {question.prompt}
+                            </Text>
                             <Text style={styles.answer}>
-                                {question.selectedOption?.optionTuple[0]}
+                                {question.selectedAnswer?.optionTuple[0]}
                             </Text>
                             <Text style={styles.value}>
-                                {question.selectedOption?.optionTuple[1]}
+                                {question.selectedAnswer?.optionTuple[1]}
                             </Text>
                         </View>
                     ))}
@@ -104,11 +121,55 @@ export const PDFSurvey: React.FC = () => {
             </Page>
             <Page size="A4">
                 <View style={styles.body}>
-                    {/* post survey */}
-                    {survey.postSurvey?.map((section, index) => (
+                    {survey.postSurvey.note?.map((section) => (
                         <View key={section.title}>
                             <Text style={styles.h3}>{section.title}</Text>
-                            {section.values.map((question, index) => (
+                            {section.content.map((question, index) => (
+                                // rome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+                                <Text key={index} style={styles.p}>
+                                    {question}
+                                </Text>
+                            ))}
+                        </View>
+                    ))}
+                    {/* post survey */}
+                    {survey.postSurvey.interpretation.map((section, index) => (
+                        <View key={section.title}>
+                            <Text style={styles.h3}>{section.title}</Text>
+                            {section.content.map((question, index) => (
+                                // rome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+                                <Text key={index} style={styles.p}>
+                                    {question}
+                                </Text>
+                            ))}
+                        </View>
+                    ))}
+                    {survey.postSurvey.scoring.map((section, index) => (
+                        <View key={section.title}>
+                            <Text style={styles.h3}>{section.title}</Text>
+                            {section.content.map((question, index) => (
+                                // rome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+                                <Text key={index} style={styles.p}>
+                                    {question}
+                                </Text>
+                            ))}
+                        </View>
+                    ))}
+                    {survey.postSurvey.mcid?.map((section, index) => (
+                        <View key={section.title}>
+                            <Text style={styles.h3}>{section.title}</Text>
+                            {section.content.map((question, index) => (
+                                // rome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+                                <Text key={index} style={styles.p}>
+                                    {question}
+                                </Text>
+                            ))}
+                        </View>
+                    ))}
+                    {survey.postSurvey.references.map((section, index) => (
+                        <View key={section.title}>
+                            <Text style={styles.h3}>{section.title}</Text>
+                            {section.content.map((question, index) => (
                                 // rome-ignore lint/suspicious/noArrayIndexKey: <explanation>
                                 <Text key={index} style={styles.p}>
                                     {question}

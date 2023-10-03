@@ -1,74 +1,111 @@
+import { getUniqueNumber } from "utils"
+import { I } from "vitest/dist/reporters-5f784f42.js"
+
 /**
- * Represents a survey with a title, subtitle, instructions, questions, and scoring information.
+ * @description Interface for a survey, which contains a title, subtitle, instructions, and a list of questions. Can contain several sub question sets.
+ * @author Logan Hendershot
+ * @date 10/03/2023
+ * @export
+ * @interface ISurvey
  */
 export interface ISurvey {
+    id: string
+    created: Date
+
     /** The title of the survey. */
     title: string
-    /** The subtitle of the survey. */
     subtitle: string
-    /** The instructions for the survey. */
-    instructions?: JSX.Element | string
+
+    surveyInstructions?: JSX.Element | string[] | undefined
+
+    // A set of one or more question sections to be displayed in the survey.
+    questionSets: IQuestionSet[]
 
     /** The post-survey sections. */
-    postSurvey?: ISurveySection[]
-
-    /** The interpretation information for the survey. */
-    interpretation?: string[]
-    /** The scoring information for the survey. */
-    scoring?: string[]
-    /** The references for the survey. */
-    references?: string[]
+    postSurvey: IPostSurvey
 
     /** The total score for the survey. */
-    totalScore: number | undefined
+    completedScore: number | undefined
+
     /** The maximum possible score for the survey. */
     maxScore: number | undefined
 
-    /** The list of question IDs for the survey. */
-    questionPrompt: string[]
-    /** The list of questions for the survey. */
-    questions: IQuestion[]
     /** The list of selected questions for the survey. */
     selected: IQuestion[]
 
     /** Whether the survey has been completed. */
     completed: boolean
 
-    /** Calculates the score for the survey. */
+    /** Calculates the score for the entirety survey. */
     calculateScore(): void
+
     /**
      * Selects an option for a question in the survey.
      * @param question The question to select an option for.
      * @param option The option to select.
      */
     selectOption(question: IQuestion, option: IOption): void
-}
-/**
- * Represents a survey instruction.
- */
-export interface ISurveyInstruction {
-    /**
-     * The text of the instruction.
-     */
-    text: JSX.Element | string
+
+    getQuestionLength(): number
 }
 
 /**
- * Represents a section of a survey, which contains a title and an array of values.
+ * @description Interface for the post survey section
+ * @author Logan Hendershot
+ * @date 10/03/2023
+ * @export
+ * @interface IPostSurvey
+ */
+export interface IPostSurvey {
+    note?: ISurveySection[]
+    interpretation: ISurveySection[]
+    scoring: ISurveySection[]
+
+    // can be MCID or clinically meaningful change
+    mcid?: ISurveySection[]
+
+    references: ISurveySection[]
+}
+
+/**
+ * @description Represents a set of questions in a survey.
+ * @author Logan Hendershot
+ * @date 10/03/2023
+ * @export
+ * @interface IQuestionSet
+ */
+export interface IQuestionSet {
+    id: number
+    title?: string
+    // pre survey instructions, can be an element if there needs html or a string array if not
+    instructions?: JSX.Element | string[]
+
+    // these are the populated questions for the survey
+    questions: IQuestion[]
+
+    // the possible answers for each question
+    answers: IOption[] | undefined
+}
+
+/**
+ * @description Represents a section of the survey to be displayed, typically title will be
+ * h1 or so and the values listed below it
+ * @author Logan Hendershot
+ * @date 10/03/2023
+ * @export
+ * @interface ISurveySection
  */
 export interface ISurveySection {
-    /**
-     * The title of the survey section.
-     */
     title?: string
-    /**
-     * An array of values for the survey section.
-     */
-    values: string[]
+    content: string[]
 }
 
 /**
- * Represents an option in a survey question.
+ * @description The possible options for a survey question.
+ * @author Logan Hendershot
+ * @date 10/03/2023
+ * @export
+ * @interface IOption
  */
 export interface IOption {
     /** The unique identifier for the option. */
@@ -78,15 +115,64 @@ export interface IOption {
 }
 
 /**
- * Represents a survey question.
+ * @description Interface for the survey questions, has a prompt and a list of options to select from, as well as the selected answer if answered.
+ * @author Logan Hendershot
+ * @date 10/03/2023
+ * @export
+ * @interface IQuestion
  */
 export interface IQuestion {
     /** The unique identifier of the question. */
     id: number
     /** The text of the question. */
-    text: string
+    prompt: string
     /** The selected option of the question, if any. */
-    selectedOption: IOption | undefined
+    selectedAnswer: IOption | undefined
     /** The available options for the question. */
     options: IOption[]
+}
+
+export class BaseQuestion implements IQuestion {
+    id: number
+    prompt: string
+    selectedAnswer: IOption | undefined
+    options: IOption[]
+
+    constructor(question: string, options: BaseOption[]) {
+        this.id = getUniqueNumber()
+        this.prompt = question
+        // for each option, create a new option
+        this.options = options.map(
+            (option) => new BaseOption(option.optionTuple),
+        )
+    }
+}
+
+export class BaseQuestionSet implements IQuestionSet {
+    id: number
+    title?: string | undefined
+    instructions?: JSX.Element | string[] | undefined
+
+    private questionPrompts: string[]
+
+    questions: BaseQuestion[]
+    answers = []
+
+    constructor(questionPrompts: string[], options: BaseOption[]) {
+        this.id = getUniqueNumber()
+        this.questionPrompts = questionPrompts
+        this.questions = this.questionPrompts.map(
+            (q) => new BaseQuestion(q, options),
+        )
+    }
+}
+
+export class BaseOption implements IOption {
+    id: number
+    optionTuple: [string, number]
+
+    constructor(optionTuple: [string, number]) {
+        this.id = getUniqueNumber()
+        this.optionTuple = optionTuple
+    }
 }

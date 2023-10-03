@@ -4,27 +4,21 @@ import { ISurvey, ISurveySection, IQuestion, IOption } from "./ISurvey"
 // TODO add instructions / fix
 
 /**
- * @description Implementation of the VFIS survey.
+ * @description Implementation of the FIQL survey.
  * @author Logan Hendershot
  * @date 09/29/2023
  * @export
- * @class VFISSurvey
+ * @class FIQLSurvey
  * @implements {ISurvey}
  */
-export class VFISSurvey implements ISurvey {
-    title = "VFIS"
-    subtitle = "Vaizey Fecal Incontinence Score"
+export class FIQLSurvey implements ISurvey {
+    title = "FIQL"
+    subtitle = "Fecal Incontinence Quality of Life Scale"
 
     instructions =
         "Please select one answer for each question to indicate how often you experience the following symptoms."
 
-    questionPrompts = [
-        "Solid stool leakage",
-        "Liquid stool leakage",
-        "Gas leakage",
-        "Pad use (for stool)",
-        "Lifestyle restriction",
-    ]
+    questionPrompts = ["In general, would you say your health is:"]
 
     interpretation = [
         "The scoring is from 0-24. The higher the score, the greater the impairment/disability or, totally incontinent.",
@@ -49,20 +43,20 @@ export class VFISSurvey implements ISurvey {
     completedScore: number | undefined
     maxScore = 100
 
-    questions: IQuestion[] = []
+    questionSets: IQuestion[] = []
     selected: IQuestion[] = []
     completed = false
 
     constructor() {
         // for each of the questions in question source, create a new question
         // with the question text and options
-        this.questions = this.questionPrompts.map((question) => {
-            return new VFISQuestion(getUniqueNumber(), question, [
-                new VFISOption(["Never", 0]),
-                new VFISOption(["Rarely", 1]),
-                new VFISOption(["Sometimes", 2]),
-                new VFISOption(["Weekly", 3]),
-                new VFISOption(["Daily", 4]),
+        this.questionSets = this.questionPrompts.map((question) => {
+            return new CCFISQuestion(getUniqueNumber(), question, [
+                new CCFISOption(["Never", 0]),
+                new CCFISOption(["Rarely", 1]),
+                new CCFISOption(["Sometimes", 2]),
+                new CCFISOption(["Weekly", 3]),
+                new CCFISOption(["Daily", 4]),
             ])
         })
 
@@ -99,7 +93,7 @@ export class VFISSurvey implements ISurvey {
     }
 
     calculateScore(): void {
-        if (this.selected.length !== this.questions.length) {
+        if (this.selected.length !== this.questionSets.length) {
             throw new Error("Not all questions have been answered")
         }
 
@@ -140,17 +134,22 @@ export class VFISSurvey implements ISurvey {
 /**
  * Represents the possible options for a UDI6Question.
  */
-export type VFIS_OPTIONS =
-    | ["Never", 0]
-    | ["Rarely", 1]
-    | ["Sometimes", 2]
-    | ["Weekly", 3]
-    | ["Daily", 4]
+export type CCFIS_OPTIONS =
+    | ["Excellent", 0]
+    | ["Very Good", 1]
+    | ["Good", 2]
+    | ["Fair", 3]
+    | ["Poor", 4]
+    | ["Most of the time", 0]
+    | ["Some of the time", 1]
+    | ["A little of the time", 2]
+    | ["None of the time", 3]
+    | ["N/A", 4]
 
-export class VFISOption implements IOption {
+export class CCFISOption implements IOption {
     id: number
-    optionTuple: VFIS_OPTIONS
-    constructor(optionText: VFIS_OPTIONS) {
+    optionTuple: CCFIS_OPTIONS
+    constructor(optionText: CCFIS_OPTIONS) {
         this.id = getUniqueNumber()
         this.optionTuple = optionText
     }
@@ -159,7 +158,7 @@ export class VFISOption implements IOption {
 /**
  * Represents a question in the UDI6 survey.
  */
-export class VFISQuestion implements IQuestion {
+export class CCFISQuestion implements IQuestion {
     /** The unique identifier for the question. */
     id: number
     /** The text of the question. */
