@@ -47,7 +47,7 @@ export class PFDI20Survey implements ISurvey {
         "Barber, M., Walters, M., et al. (2005). 'Short forms of two condition-specific quality of life questionnaires for women with pelvic floor disorders (PFDI-20 and PFIQ -7).' American Journal of Obstetrics and Gynecology 193: 103-113",
     ]
 
-    questionList = [
+    questionPrompt = [
         "Frequent urination?",
         "Urine leakage related to the feeling of urgency?",
         "Urine leakage related to physical activity, coughing or sneezing?",
@@ -78,7 +78,7 @@ export class PFDI20Survey implements ISurvey {
     constructor() {
         // for each of the questions in question source, create a new question
         // with the question text and options
-        this.questions = this.questionList.map((question) => {
+        this.questions = this.questionPrompt.map((question) => {
             return new PFDIQuestion(getUniqueNumber(), question, [
                 new PFDIOption(["Not present", 0]),
                 new PFDIOption(["Not at all", 1]),

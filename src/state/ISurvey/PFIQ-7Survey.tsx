@@ -37,7 +37,7 @@ export class PFIQSurvey implements ISurvey {
         "Barber MD, Kuchibhatla M, Pieper CF, Bump RC. Psychometric Evaluation Of 2 Comprehensive Condition - Specific Quality of Life Instruments for Women with Pelvic Disorders. American Journal of Obstetric and Gynecology Volume 185; November 6, 2001",
     ]
 
-    questionList = [
+    questionPrompt = [
         "Ability to do household chores (cooking, laundry, housecleaning)?",
         "Ability to do physical activities such as walking, swimming, or other exercise?",
         "Ability to do entertainment activities (movies, concerts, etc.)?",
@@ -74,7 +74,7 @@ export class PFIQSurvey implements ISurvey {
         // for each of the questions in question source, create a new question
         // with the question text and options
 
-        const qs = this.questionList.map((question) => {
+        const qs = this.questionPrompt.map((question) => {
             const questionsWithTopic = new Array<PFIQQuestion>()
             this.questionTopics.forEach((topic) => {
                 return questionsWithTopic.push(

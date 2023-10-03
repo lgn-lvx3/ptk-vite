@@ -24,7 +24,7 @@ export class POPDI6Survey implements ISurvey {
     //     "Uebersax JS, Wyman JF, Shumaker SA, McClish DK, Fantl JA, Continence Program for Women Research Group. Short Forms to Assess Life Quality and Symptom Distress for Urinary Incontinence in Women: The Incontinence Impact Questionnaire and the Urogenital Distress Inventory. Neurourology and Urodynamics. 1995;14: 131-39.",
     // ]
 
-    questionList = [
+    questionPrompt = [
         "Usually experience pressure in the lower abdomen?",
         "Usually experience heaviness or dullness in the pelvic area?",
         "Usually have a bulge or something falling out that you can see or feel in your vaginal area?",
@@ -54,7 +54,7 @@ export class POPDI6Survey implements ISurvey {
     constructor() {
         // for each of the questions in question source, create a new question
         // with the question text and options
-        this.questions = this.questionList.map((question) => {
+        this.questions = this.questionPrompt.map((question) => {
             return new POPDI6Question(getUniqueNumber(), question, [
                 new POPDI6Option(["Not Present", 0]),
                 new POPDI6Option(["Not at all", 1]),

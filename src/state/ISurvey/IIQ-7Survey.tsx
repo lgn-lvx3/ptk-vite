@@ -18,7 +18,7 @@ export class IIQSurvey implements ISurvey {
     instructions =
         "Some people find that accidental urine loss may affect their activities, relationships, and feelings. The questions below refer to areas in your life that may have been influenced or changed by your problem. For each question, circle the response that best describes how much your activities, relationships, and feelings are being affected by urine leakage. Has urine leakage affected your:"
 
-    questionList = [
+    questionPrompt = [
         "Ability to do household chores (cooking, housecleaning, laundry)?",
         "Physical recreation such as walking, swimming, or other exercise?",
         "Entertainment activities (movies, concerts, etc.)?",
@@ -57,7 +57,7 @@ export class IIQSurvey implements ISurvey {
     constructor() {
         // for each of the questions in question source, create a new question
         // with the question text and options
-        this.questions = this.questionList.map((question) => {
+        this.questions = this.questionPrompt.map((question) => {
             return new POPDI6Question(getUniqueNumber(), question, [
                 new POPDI6Option(["Not Present", 0]),
                 new POPDI6Option(["Not at all", 1]),

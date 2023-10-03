@@ -25,7 +25,7 @@ export interface ISurvey {
     maxScore: number | undefined
 
     /** The list of question IDs for the survey. */
-    questionList: string[]
+    questionPrompt: string[]
     /** The list of questions for the survey. */
     questions: IQuestion[]
     /** The list of selected questions for the survey. */

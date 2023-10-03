@@ -4,43 +4,43 @@ import { ISurvey, ISurveySection, IQuestion, IOption } from "./ISurvey"
 // TODO add instructions / fix
 
 /**
- * @description Implementation of the POPDI-6 survey.
+ * @description Implementation of the VFIS survey.
  * @author Logan Hendershot
  * @date 09/29/2023
  * @export
- * @class POPDI-6
+ * @class VFISSurvey
  * @implements {ISurvey}
  */
-export class CRAD8Survey implements ISurvey {
-    title = "CRAD-8"
-    subtitle = "Colorectal-Anal distress Inventory 8"
+export class VFISSurvey implements ISurvey {
+    title = "VFIS"
+    subtitle = "Vaizey Fecal Incontinence Score"
 
-    // instructions = {
-    //     text: "Please answer all of the questions in the following survey. These questions will ask you if you have certain bowel, bladder, or pelvic symptoms and, if you do, how much they bother you. Answer these by circling the appropriate number. While answering these questions, please consider your symptoms over the last 3 months. The PFDI-20 has 20 items and 3 scales of your symptoms. All items use the following format with a response scale from 0 to 4.",
-    //     timePeriod: "over the last 3 months.",
-    // }
-
-    // references = [
-    //     "Uebersax JS, Wyman JF, Shumaker SA, McClish DK, Fantl JA, Continence Program for Women Research Group. Short Forms to Assess Life Quality and Symptom Distress for Urinary Incontinence in Women: The Incontinence Impact Questionnaire and the Urogenital Distress Inventory. Neurourology and Urodynamics. 1995;14: 131-39.",
-    // ]
+    instructions =
+        "Please select one answer for each question to indicate how often you experience the following symptoms."
 
     questionPrompt = [
-        "Feel you need to strain too hard to have a bowel movement?",
-        "Feel you have not completely emptied your bowels at the end of a bowel movement?",
-        "Usually lose stool beyond your control if your stool is well formed?",
-        "Usually lose stool beyond your control if your stool is loose?",
-        "Usually lose gas from the rectum beyond your control?",
-        "Usually have pain when you pass your stool?",
-        "Experience a strong sense of urgency and have to rush to the bathroom to have a bowel movement?",
-        "Does part of your bowel ever pass through the rectum and bulge outside during or after a bowel movement?",
+        "Solid stool leakage",
+        "Liquid stool leakage",
+        "Gas leakage",
+        "Pad use (for stool)",
+        "Lifestyle restriction",
     ]
 
     interpretation = [
-        "The scale is from 0-100. The higher the score, the greater the impairment/disability.",
+        "The scoring is from 0-24. The higher the score, the greater the impairment/disability or, totally incontinent.",
     ]
 
     scoring = [
-        "The PFDI-20 has 20 items and 3 scales of your symptoms. All items use the following format with a response scale from 0 to 4.",
+        "Below is the score associated with each definition",
+        "Never: 0, Rarely: 1, Sometimes: 2, Weekly: 3, Daily: 4",
+        "Need to wear a pad or plug - A “no” answer = 0; a “yes” answer = 2",
+        "Taking constipation medicines - A “no” answer = 0; a “yes” answer = 2",
+        "Lack of ability to defer defecation for 15 minutes - a “no” answer = 0; a “yes” answer = 4",
+        "The scores for each question are added together to produce a final score (max is 24 points).",
+    ]
+
+    references = [
+        "Vaizey CJ, Carapeti E, Cahill JA, et al. Prospective comparison of fecal incontinence grading systems. Gut. 1999 Jan;44(1):77-80.",
     ]
 
     preSurvey = new Array<ISurveySection>()
@@ -57,13 +57,24 @@ export class CRAD8Survey implements ISurvey {
         // for each of the questions in question source, create a new question
         // with the question text and options
         this.questions = this.questionPrompt.map((question) => {
-            return new POPDI6Question(getUniqueNumber(), question, [
-                new POPDI6Option(["Not Present", 0]),
-                new POPDI6Option(["Not at all", 1]),
-                new POPDI6Option(["A little bit", 2]),
-                new POPDI6Option(["Moderately", 3]),
-                new POPDI6Option(["Greatly", 4]),
+            return new CCFISQuestion(getUniqueNumber(), question, [
+                new CCFISOption(["Never", 0]),
+                new CCFISOption(["Rarely", 1]),
+                new CCFISOption(["Sometimes", 2]),
+                new CCFISOption(["Weekly", 3]),
+                new CCFISOption(["Daily", 4]),
             ])
+        })
+
+        this.preSurvey.push({
+            title: "Response Definitions",
+            values: [
+                "Never - no episodes in the past 4 weeks",
+                "Rarely - 1 episode in the past 4 weeks",
+                "Sometimes - 1 or more episodes in the past 4 weeks",
+                "Weekly - 1 or more episodes a week",
+                "Daily - 1 or more episodes a day",
+            ],
         })
 
         this.postSurvey.push({
@@ -73,6 +84,17 @@ export class CRAD8Survey implements ISurvey {
         this.postSurvey.push({
             title: "Scoring",
             values: [...this.scoring],
+        })
+        this.postSurvey.push({
+            title: "Minimal Clinical Important Difference (MCID)",
+            values: [
+                "Reasonable estimates for MCID is -5 points.",
+                "Bols EM, Hendriks EJ, Deutekom M, et al. Inconclusive psychometric properties of the Vaizey score in fecally incontinent patients: a prospective cohort study. Neurourology & Urodynamics. 2010 Mar;29(3):370-7.",
+            ],
+        })
+        this.postSurvey.push({
+            title: "References",
+            values: [...this.references],
         })
     }
 
@@ -118,17 +140,17 @@ export class CRAD8Survey implements ISurvey {
 /**
  * Represents the possible options for a UDI6Question.
  */
-export type POPDI6_OPTIONS =
-    | ["Not Present", 0]
-    | ["Not at all", 1]
-    | ["A little bit", 2]
-    | ["Moderately", 3]
-    | ["Greatly", 4]
+export type CCFIS_OPTIONS =
+    | ["Never", 0]
+    | ["Rarely", 1]
+    | ["Sometimes", 2]
+    | ["Weekly", 3]
+    | ["Daily", 4]
 
-export class POPDI6Option implements IOption {
+export class CCFISOption implements IOption {
     id: number
-    optionTuple: POPDI6_OPTIONS
-    constructor(optionText: POPDI6_OPTIONS) {
+    optionTuple: CCFIS_OPTIONS
+    constructor(optionText: CCFIS_OPTIONS) {
         this.id = getUniqueNumber()
         this.optionTuple = optionText
     }
@@ -137,7 +159,7 @@ export class POPDI6Option implements IOption {
 /**
  * Represents a question in the UDI6 survey.
  */
-export class POPDI6Question implements IQuestion {
+export class CCFISQuestion implements IQuestion {
     /** The unique identifier for the question. */
     id: number
     /** The text of the question. */
