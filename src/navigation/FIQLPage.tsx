@@ -1,18 +1,18 @@
 import { BaseSurvey } from "components/BaseSurvey"
 import React, { useEffect } from "react"
-import { UDI6Survey } from "state/Surveys/UDI6-Survey"
 import { actions, useTrackedStore } from "state/Store"
+import { FIQLSurvey } from "state/Surveys/FIQLSurvey"
 
-export const UDI6Page: React.FC = () => {
+export const FIQLPage: React.FC = () => {
     const language = useTrackedStore().preferences.language()
     useEffect(() => {
-        console.log("Creating new survey")
-        actions.app.survey(new UDI6Survey())
+        console.log("Creating new FIQL survey")
+        actions.app.survey(new FIQLSurvey())
     }, [])
 
     useEffect(() => {
         console.log(`Language changed to: ${language}`)
-        actions.app.survey(new UDI6Survey())
+        actions.app.survey(new FIQLSurvey())
     }, [language])
 
     return (

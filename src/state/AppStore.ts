@@ -5,6 +5,7 @@ import { ISurvey } from "state/ISurvey/ISurvey"
 export type SupportedLanguage = "en" | "es"
 
 interface State {
+    surveyNavTitles: string[]
     surveyInProgress: boolean
     surveyCompleted: boolean
     disclaimerAccepted: boolean
@@ -15,6 +16,17 @@ interface State {
 }
 
 const initialState: State = {
+    surveyNavTitles: [
+        "UDI6",
+        "FIQL",
+        "POPDI6",
+        "CRAD8",
+        "PFDI20",
+        "IIQ7",
+        "VFIS",
+        "CCFIS",
+        "PFIQ7",
+    ],
     surveyInProgress: false,
     surveyCompleted: false,
     disclaimerAccepted: false,

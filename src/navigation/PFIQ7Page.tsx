@@ -1,18 +1,18 @@
 import { BaseSurvey } from "components/BaseSurvey"
 import React, { useEffect } from "react"
-import { UDI6Survey } from "state/Surveys/UDI6-Survey"
 import { actions, useTrackedStore } from "state/Store"
+import { PFIQ7Survey } from "state/Surveys/PFIQ-7Survey"
 
-export const UDI6Page: React.FC = () => {
+export const PFIQ7Page: React.FC = () => {
     const language = useTrackedStore().preferences.language()
     useEffect(() => {
         console.log("Creating new survey")
-        actions.app.survey(new UDI6Survey())
+        actions.app.survey(new PFIQ7Survey())
     }, [])
 
     useEffect(() => {
         console.log(`Language changed to: ${language}`)
-        actions.app.survey(new UDI6Survey())
+        actions.app.survey(new PFIQ7Survey())
     }, [language])
 
     return (

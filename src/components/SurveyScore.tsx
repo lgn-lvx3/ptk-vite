@@ -7,7 +7,7 @@ import { Button } from "react-daisyui"
 import { PDFSurvey } from "./PDFSurvey"
 import { useSnackbar } from "notistack"
 
-import React, { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { ExclamationCircleIcon } from "@heroicons/react/24/solid"
 import { Alert, Form, Toggle } from "react-daisyui"
 
@@ -87,7 +87,7 @@ const SurveyResults = ({ survey }: Props) => {
             <Button color="neutral" variant="link">
                 <PDFDownloadLink
                     document={<PDFSurvey />}
-                    fileName={`${survey?.title}.pdf`}
+                    fileName={`${survey?.title}-${survey?.id}.pdf`}
                 >
                     {translate("download")}
                 </PDFDownloadLink>

@@ -9,8 +9,6 @@ import {
 } from "@react-pdf/renderer"
 import { store } from "state/Store"
 
-import logo from "/src/assets/logo.png"
-
 export const PDFSurvey: React.FC = () => {
     const survey = store.app.survey()
     const score = store.app.score()
@@ -58,6 +56,20 @@ export const PDFSurvey: React.FC = () => {
         option: { marginTop: 10 },
     })
 
+    const Section: React.FC<{
+        title: string | undefined
+        content: string[] | undefined
+    }> = ({ title, content }) => (
+        <View style={{ marginBottom: 20 }}>
+            <Text style={styles.h3}>{title}</Text>
+            {content?.map((content, index) => (
+                <Text key={index} style={styles.p}>
+                    {content}
+                </Text>
+            ))}
+        </View>
+    )
+
     return (
         <Document>
             <Page size="A4">
@@ -70,33 +82,44 @@ export const PDFSurvey: React.FC = () => {
                         {survey.created.toLocaleString()}
                     </Text>
 
-                    <View>
-                        <Text style={styles.h3}>Instructions</Text>
-                        {survey.questionSets.map((val) => {
-                            return (
-                                <Text key={val.id} style={styles.p}>
-                                    {val.instructions}
-                                </Text>
-                            )
-                        })}
-                    </View>
-                    <View style={styles.answerRow}>
-                        <Text style={styles.question}>Question</Text>
-                        <Text style={styles.answer}>Answer</Text>
-                        <Text style={styles.value}>Value</Text>
-                    </View>
                     {/* survey questions */}
-                    {survey.selected.map((question) => (
-                        <View key={question.id} style={styles.answerRow}>
-                            <Text style={styles.question}>
-                                {question.prompt}
-                            </Text>
-                            <Text style={styles.answer}>
-                                {question.selectedAnswer?.optionTuple[0]}
-                            </Text>
-                            <Text style={styles.value}>
-                                {question.selectedAnswer?.optionTuple[1]}
-                            </Text>
+                    {survey.questionSets.map((questionSet) => (
+                        <View key={questionSet.id}>
+                            {/* instructions */}
+                            <View>
+                                <Text style={styles.h3}>Instructions</Text>
+                                return (
+                                <Text key={questionSet.id} style={styles.p}>
+                                    {questionSet.instructions}
+                                </Text>
+                            </View>
+                            <View style={styles.answerRow}>
+                                <Text style={styles.question}>Question</Text>
+                                <Text style={styles.answer}>Answer</Text>
+                                <Text style={styles.value}>Value</Text>
+                            </View>
+                            {questionSet.questions.map((question) => (
+                                <View
+                                    key={question.id}
+                                    style={styles.answerRow}
+                                >
+                                    <Text style={styles.question}>
+                                        {question.prompt}
+                                    </Text>
+                                    <Text style={styles.answer}>
+                                        {
+                                            question.selectedAnswer
+                                                ?.optionTuple[0]
+                                        }
+                                    </Text>
+                                    <Text style={styles.value}>
+                                        {
+                                            question.selectedAnswer
+                                                ?.optionTuple[1]
+                                        }
+                                    </Text>
+                                </View>
+                            ))}
                         </View>
                     ))}
                     {/* totals */}
@@ -121,62 +144,40 @@ export const PDFSurvey: React.FC = () => {
             </Page>
             <Page size="A4">
                 <View style={styles.body}>
-                    {survey.postSurvey.note?.map((section) => (
-                        <View key={section.title}>
-                            <Text style={styles.h3}>{section.title}</Text>
-                            {section.content.map((question, index) => (
-                                // rome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-                                <Text key={index} style={styles.p}>
-                                    {question}
-                                </Text>
-                            ))}
+                    {survey.postSurvey.note && (
+                        <View>
+                            <Text style={styles.h3}>Note</Text>
+                            {survey.postSurvey.note?.content.map(
+                                (content, index) => (
+                                    // rome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+                                    <Text key={index} style={styles.p}>
+                                        {content}
+                                    </Text>
+                                ),
+                            )}
                         </View>
-                    ))}
+                    )}
                     {/* post survey */}
-                    {survey.postSurvey.interpretation.map((section, index) => (
-                        <View key={section.title}>
-                            <Text style={styles.h3}>{section.title}</Text>
-                            {section.content.map((question, index) => (
-                                // rome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-                                <Text key={index} style={styles.p}>
-                                    {question}
-                                </Text>
-                            ))}
-                        </View>
-                    ))}
-                    {survey.postSurvey.scoring.map((section, index) => (
-                        <View key={section.title}>
-                            <Text style={styles.h3}>{section.title}</Text>
-                            {section.content.map((question, index) => (
-                                // rome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-                                <Text key={index} style={styles.p}>
-                                    {question}
-                                </Text>
-                            ))}
-                        </View>
-                    ))}
-                    {survey.postSurvey.mcid?.map((section, index) => (
-                        <View key={section.title}>
-                            <Text style={styles.h3}>{section.title}</Text>
-                            {section.content.map((question, index) => (
-                                // rome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-                                <Text key={index} style={styles.p}>
-                                    {question}
-                                </Text>
-                            ))}
-                        </View>
-                    ))}
-                    {survey.postSurvey.references.map((section, index) => (
-                        <View key={section.title}>
-                            <Text style={styles.h3}>{section.title}</Text>
-                            {section.content.map((question, index) => (
-                                // rome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-                                <Text key={index} style={styles.p}>
-                                    {question}
-                                </Text>
-                            ))}
-                        </View>
-                    ))}
+                    {/* interpretation */}
+                    <Section
+                        title={survey.postSurvey.interpretation.title}
+                        content={survey.postSurvey.interpretation.content}
+                    />
+                    {/* scoring */}
+                    <Section
+                        title={survey.postSurvey.scoring.title}
+                        content={survey.postSurvey.scoring.content}
+                    />
+                    {/* mcid */}
+                    <Section
+                        title={survey.postSurvey.mcid?.title}
+                        content={survey.postSurvey.mcid?.content}
+                    />
+                    {/* references */}
+                    <Section
+                        title={survey.postSurvey.references.title}
+                        content={survey.postSurvey.references.content}
+                    />
                 </View>
             </Page>
         </Document>

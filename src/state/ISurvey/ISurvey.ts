@@ -1,6 +1,3 @@
-import { getUniqueNumber } from "utils"
-import { I } from "vitest/dist/reporters-5f784f42.js"
-
 /**
  * @description Interface for a survey, which contains a title, subtitle, instructions, and a list of questions. Can contain several sub question sets.
  * @author Logan Hendershot
@@ -16,7 +13,7 @@ export interface ISurvey {
     title: string
     subtitle: string
 
-    surveyInstructions?: JSX.Element | string[] | undefined
+    surveyInstructions?: string[]
 
     // A set of one or more question sections to be displayed in the survey.
     questionSets: IQuestionSet[]
@@ -57,14 +54,14 @@ export interface ISurvey {
  * @interface IPostSurvey
  */
 export interface IPostSurvey {
-    note?: ISurveySection[]
-    interpretation: ISurveySection[]
-    scoring: ISurveySection[]
+    note?: ISurveySection
+    interpretation: ISurveySection
+    scoring: ISurveySection
 
     // can be MCID or clinically meaningful change
-    mcid?: ISurveySection[]
+    mcid?: ISurveySection
 
-    references: ISurveySection[]
+    references: ISurveySection
 }
 
 /**
@@ -77,8 +74,9 @@ export interface IPostSurvey {
 export interface IQuestionSet {
     id: number
     title?: string
+    subtitle?: string
     // pre survey instructions, can be an element if there needs html or a string array if not
-    instructions?: JSX.Element | string[]
+    instructions?: string[]
 
     // these are the populated questions for the survey
     questions: IQuestion[]
@@ -130,49 +128,4 @@ export interface IQuestion {
     selectedAnswer: IOption | undefined
     /** The available options for the question. */
     options: IOption[]
-}
-
-export class BaseQuestion implements IQuestion {
-    id: number
-    prompt: string
-    selectedAnswer: IOption | undefined
-    options: IOption[]
-
-    constructor(question: string, options: BaseOption[]) {
-        this.id = getUniqueNumber()
-        this.prompt = question
-        // for each option, create a new option
-        this.options = options.map(
-            (option) => new BaseOption(option.optionTuple),
-        )
-    }
-}
-
-export class BaseQuestionSet implements IQuestionSet {
-    id: number
-    title?: string | undefined
-    instructions?: JSX.Element | string[] | undefined
-
-    private questionPrompts: string[]
-
-    questions: BaseQuestion[]
-    answers = []
-
-    constructor(questionPrompts: string[], options: BaseOption[]) {
-        this.id = getUniqueNumber()
-        this.questionPrompts = questionPrompts
-        this.questions = this.questionPrompts.map(
-            (q) => new BaseQuestion(q, options),
-        )
-    }
-}
-
-export class BaseOption implements IOption {
-    id: number
-    optionTuple: [string, number]
-
-    constructor(optionTuple: [string, number]) {
-        this.id = getUniqueNumber()
-        this.optionTuple = optionTuple
-    }
 }
