@@ -2,8 +2,6 @@ import { createStore } from "@udecode/zustood"
 import { IQuestion, IOption } from "state/ISurvey/ISurvey"
 import { ISurvey } from "state/ISurvey/ISurvey"
 
-export type SupportedLanguage = "en" | "es"
-
 interface State {
     surveyNavTitles: string[]
     surveyInProgress: boolean

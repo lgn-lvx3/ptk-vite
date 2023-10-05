@@ -1,14 +1,28 @@
 import { createStore } from "@udecode/zustood"
 
-export type SupportedLanguage = "en" | "es"
+export type SupportedLanguage = {
+    code: string
+    name: string
+}
 
 interface State {
     theme: "light" | "dark"
-    language: SupportedLanguage
+    supportedLanguages: SupportedLanguage[]
+    language: string
 }
 
 const initialState: State = {
     theme: "light",
+    supportedLanguages: [
+        {
+            code: "en",
+            name: "English",
+        },
+        {
+            code: "es",
+            name: "Español",
+        },
+    ],
     language: "en",
 }
 
