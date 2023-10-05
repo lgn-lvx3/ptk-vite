@@ -1,4 +1,13 @@
 const en = {
+    hero: {
+        title: "Pelvic Toolkit Calculators",
+        subtitle:
+            "Accurate outcome measures for calculating Pelvic analysis for patients.",
+        action: "Get Started",
+    },
+    navigation: {
+        surveys: "Surveys",
+    },
     disclaimer: {
         text: "This tool should NOT be considered as a substitute for any professional medical service, NOR as a substitute for clinical judgment.",
         understand: "I understand",

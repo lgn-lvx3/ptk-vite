@@ -8,6 +8,139 @@ import {
     Image,
 } from "@react-pdf/renderer"
 import { store } from "state/Store"
+import logo from "/src/assets/calculator-logo-pdf.png"
+import { ISurvey } from "state/ISurvey/ISurvey"
+
+const styles = StyleSheet.create({
+    title: {
+        fontSize: 24,
+        textAlign: "left",
+        textTransform: "uppercase",
+        display: "flex",
+        flex: 1,
+    },
+    subtitle: {
+        fontSize: 14,
+        textAlign: "left",
+        marginTop: 15,
+        textTransform: "uppercase",
+        color: "#4B5563",
+    },
+    h3: { fontSize: 18, marginTop: 25, fontWeight: "bold" },
+    p: { fontSize: 14, marginVertical: 15 },
+    answerRow: {
+        display: "flex",
+        flexDirection: "row",
+        gap: 10,
+        justifyContent: "center",
+        alignItems: "center",
+        borderBottom: "2px solid #E5E7EB",
+        paddingBottom: 10,
+        marginVertical: 10,
+    },
+    question: {
+        fontSize: 14,
+        fontWeight: "bold",
+        flex: 2,
+        paddingRight: 20,
+    },
+    answer: {
+        fontSize: 14,
+        fontWeight: "bold",
+        flex: 1,
+        textAlign: "center",
+    },
+    value: { fontSize: 14, flex: 0.25, textAlign: "center" },
+    option: { marginTop: 10 },
+})
+
+const Header: React.FC<{
+    survey: ISurvey
+}> = ({ survey }) => (
+    <View
+        style={{
+            display: "flex",
+            flexDirection: "row",
+            marginBottom: 20,
+        }}
+    >
+        <View
+            style={{
+                display: "flex",
+                flexDirection: "column",
+                flex: 1,
+                gap: 10,
+            }}
+        >
+            <Text
+                style={{
+                    textTransform: "uppercase",
+                    fontSize: 24,
+                    fontWeight: "bold",
+                }}
+            >
+                {survey.title}
+            </Text>
+            <Text
+                style={{
+                    fontSize: 12,
+                    textTransform: "uppercase",
+                    color: "#4B5563",
+                    fontWeight: "demibold",
+                }}
+            >
+                {survey.subtitle}
+            </Text>
+            <Text style={{ fontSize: 14, textTransform: "uppercase" }}>
+                ID: {survey.id}
+            </Text>
+            <Text style={{ fontSize: 14, textTransform: "uppercase" }}>
+                {survey.created.toLocaleString()}
+            </Text>
+        </View>
+        <View
+            style={{
+                display: "flex",
+                alignSelf: "flex-end",
+                flex: 1,
+                maxHeight: 100,
+                maxWidth: 100,
+                borderRadius: 15,
+                overflow: "hidden",
+            }}
+        >
+            <Image
+                src={logo}
+                style={{
+                    height: "auto",
+                    objectFit: "scale-down",
+                }}
+            />
+        </View>
+    </View>
+)
+
+const Section: React.FC<{
+    title: string | undefined
+    content: string[] | undefined
+}> = ({ title, content }) => (
+    <View style={{ marginBottom: 20 }}>
+        <Text
+            style={{
+                fontSize: 18,
+                marginTop: 25,
+                fontWeight: "bold",
+            }}
+        >
+            {title}
+        </Text>
+        {content?.map((content, index) => (
+            <Text key={index} style={styles.p}>
+                {content}
+            </Text>
+        ))}
+    </View>
+)
 
 export const PDFSurvey: React.FC = () => {
     const survey = store.app.survey()
@@ -17,70 +150,19 @@ export const PDFSurvey: React.FC = () => {
         return null
     }
 
-    const styles = StyleSheet.create({
-        title: { fontSize: 24, textAlign: "left", textTransform: "uppercase" },
-        subtitle: {
-            fontSize: 14,
-            textAlign: "left",
-            marginTop: 15,
-            textTransform: "uppercase",
-            color: "#4B5563",
-        },
-        body: { marginTop: 35, marginBottom: 60, paddingHorizontal: 35 },
-        h3: { fontSize: 18, marginTop: 25, fontWeight: "bold" },
-        p: { fontSize: 14, marginVertical: 15 },
-        answerRow: {
-            display: "flex",
-            flexDirection: "row",
-            width: "100%",
-            gap: 10,
-            justifyContent: "center",
-            alignItems: "center",
-            borderBottom: "2px solid #E5E7EB",
-            paddingBottom: 10,
-            marginVertical: 10,
-        },
-        question: {
-            fontSize: 14,
-            fontWeight: "bold",
-            flex: 2,
-            paddingRight: 20,
-        },
-        answer: {
-            fontSize: 14,
-            fontWeight: "bold",
-            flex: 1,
-            textAlign: "center",
-        },
-        value: { fontSize: 14, flex: 0.25, textAlign: "center" },
-        option: { marginTop: 10 },
-    })
-
-    const Section: React.FC<{
-        title: string | undefined
-        content: string[] | undefined
-    }> = ({ title, content }) => (
-        <View style={{ marginBottom: 20 }}>
-            <Text style={styles.h3}>{title}</Text>
-            {content?.map((content, index) => (
-                <Text key={index} style={styles.p}>
-                    {content}
-                </Text>
-            ))}
-        </View>
-    )
-
     return (
         <Document>
             <Page size="A4">
-                <View style={styles.body}>
-                    {/* pre survey */}
-                    <Text style={styles.title}>{survey.title}</Text>
-                    <Text style={styles.subtitle}>{survey.subtitle}</Text>
-                    <Text style={styles.subtitle}>ID: {survey.id}</Text>
-                    <Text style={styles.subtitle}>
-                        {survey.created.toLocaleString()}
-                    </Text>
+                <View
+                    style={{
+                        marginTop: 35,
+                        paddingHorizontal: 35,
+                        display: "flex",
+                        flex: 1,
+                        flexDirection: "column",
+                    }}
+                >
+                    <Header survey={survey} />
 
                     {/* survey questions */}
                     {survey.questionSets.map((questionSet) => (
@@ -88,7 +170,6 @@ export const PDFSurvey: React.FC = () => {
                             {/* instructions */}
                             <View>
                                 <Text style={styles.h3}>Instructions</Text>
-                                return (
                                 <Text key={questionSet.id} style={styles.p}>
                                     {questionSet.instructions}
                                 </Text>
@@ -143,7 +224,16 @@ export const PDFSurvey: React.FC = () => {
                 </View>
             </Page>
             <Page size="A4">
-                <View style={styles.body}>
+                <View
+                    style={{
+                        marginTop: 35,
+                        marginBottom: 60,
+                        paddingHorizontal: 35,
+                        display: "flex",
+                        flex: 1,
+                        flexDirection: "column",
+                    }}
+                >
                     {survey.postSurvey.note && (
                         <View>
                             <Text style={styles.h3}>Note</Text>

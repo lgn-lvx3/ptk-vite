@@ -1,4 +1,13 @@
 const es = {
+    hero: {
+        title: "Calculadoras del Kit de Herramientas Pélvicas",
+        subtitle:
+            "Medidas de resultados precisas para calcular el análisis pélvico para pacientes.",
+        action: "Comenzar",
+    },
+    navigation: {
+        surveys: "Encuestas",
+    },
     disclaimer: {
         text: "Esta herramienta NO debe considerarse como un sustituto de ningún servicio médico profesional, NI como un sustituto del juicio clínico.",
         understand: "Entiendo",

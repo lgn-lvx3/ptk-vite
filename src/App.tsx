@@ -14,6 +14,8 @@ import { IIQ7Page } from "navigation/IIQ7Page"
 import { VFISPage } from "navigation/VFISPage"
 import { CCFISPage } from "navigation/CCFISPage"
 import { PFIQ7Page } from "navigation/PFIQ7Page"
+import { Home } from "navigation/Home"
+import { Surveys } from "navigation/Surveys"
 
 const router = createBrowserRouter([
     {
@@ -21,6 +23,11 @@ const router = createBrowserRouter([
         element: <Root />,
         errorElement: <ErrorPage />,
         children: [
+            { index: true, element: <Home /> },
+            {
+                path: "surveys",
+                element: <Surveys />,
+            },
             {
                 path: "surveys/udi6",
                 element: <UDI6Page />,

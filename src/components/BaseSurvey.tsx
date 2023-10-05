@@ -8,6 +8,8 @@ import { SurveyScore } from "./SurveyScore"
 import autoAnimate from "@formkit/auto-animate"
 import { IOption, IQuestion, IQuestionSet } from "state/ISurvey/ISurvey"
 import { useSnackbar } from "notistack"
+import { PDFRenderer, PDFViewer } from "@react-pdf/renderer"
+import { PDFSurvey } from "./PDFSurvey"
 
 interface Props {
     questionSet: IQuestionSet
@@ -184,6 +186,11 @@ export const BaseSurvey: React.FC = () => {
                     </div>
                 </Card.Body>
             </Card>
+            {/* <div className="h-screen">
+                <PDFViewer className="h-screen w-full">
+                    <PDFSurvey />
+                </PDFViewer>
+            </div> */}
         </div>
     )
 }
