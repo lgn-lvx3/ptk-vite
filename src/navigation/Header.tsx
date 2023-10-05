@@ -1,5 +1,5 @@
 import React from "react"
-import { Navbar, Button, Menu, Avatar } from "react-daisyui"
+import { Navbar, Button, Menu, Avatar, Badge } from "react-daisyui"
 import { Link } from "react-router-dom"
 
 import logo from "/src/assets/calculator-logo.png"
@@ -21,23 +21,56 @@ export const Header: React.FC<Props> = ({ title }) => {
                     </Link>
                 </Navbar.Start>
                 <Navbar.Center className="hidden lg:flex">
-                    <Menu horizontal className="px-1">
-                        {surveyNavTitles.map((title) => (
-                            <Menu.Item key={title}>
-                                <Link to={`surveys/${title}`}>
-                                    <Button
-                                        color="ghost"
-                                        variant="link"
-                                        size="sm"
-                                    >
-                                        {title}
-                                    </Button>
-                                </Link>
+                    {/* <Menu horizontal className="px-1">
+                        <Menu horizontal>
+                            <Menu.Item>
+                                <details>
+                                    <summary>Surveys</summary>
+                                    <ul className="flex flex-1 flex-col z-10">
+                                        {surveyNavTitles.map((title) => (
+                                            <Menu.Item key={title}>
+                                                <Link to={`surveys/${title}`}>
+                                                    <Button
+                                                        color="ghost"
+                                                        variant="link"
+                                                        size="sm"
+                                                    >
+                                                        {title}
+                                                    </Button>
+                                                </Link>
+                                            </Menu.Item>
+                                        ))}
+                                    </ul>
+                                </details>
                             </Menu.Item>
-                        ))}
-                    </Menu>
+                        </Menu>
+                    </Menu> */}
                 </Navbar.Center>
                 <Navbar.End>
+                    <Menu horizontal className="px-1">
+                        <Menu horizontal>
+                            <Menu.Item>
+                                <details>
+                                    <summary>Surveys</summary>
+                                    <ul className="flex flex-1 flex-col z-10">
+                                        {surveyNavTitles.map((title) => (
+                                            <Menu.Item key={title}>
+                                                <Link to={`surveys/${title}`}>
+                                                    <Button
+                                                        color="ghost"
+                                                        variant="link"
+                                                        size="sm"
+                                                    >
+                                                        {title}
+                                                    </Button>
+                                                </Link>
+                                            </Menu.Item>
+                                        ))}
+                                    </ul>
+                                </details>
+                            </Menu.Item>
+                        </Menu>
+                    </Menu>
                     <LanguageDropdown />
                 </Navbar.End>
             </Navbar>
