@@ -4,6 +4,8 @@ import { i18n, translate } from "utils/i18n"
 import { useStore, useTrackedStore } from "state/Store"
 import { useEffect, useState } from "react"
 
+import logo from "/src/assets/calculator-logo.png"
+
 export const Home = () => {
     const language = useTrackedStore().preferences.language()
 
@@ -22,7 +24,7 @@ export const Home = () => {
             <Hero>
                 <Hero.Content className="lg:flex-row-reverse">
                     <img
-                        src="/src/assets/calculator-logo.png"
+                        src={logo}
                         alt="logo"
                         className="hidden max-w-sm rounded-lg shadow-2xl md:block"
                     />

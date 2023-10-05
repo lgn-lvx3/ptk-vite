@@ -6,6 +6,8 @@ import { LanguageDropdown } from "components/LanguageDropdown"
 import { store, useTrackedStore } from "state/Store"
 import { translate } from "utils/i18n"
 
+import logo from "/src/assets/logo.png"
+
 interface Props {
     title: string
 }
@@ -27,7 +29,7 @@ export const Header: React.FC<Props> = ({ title }) => {
             <Navbar className="shadow-lg rounded-lg mb-10">
                 <Link to="/">
                     <img
-                        src="/src/assets/logo.png"
+                        src={logo}
                         alt="Logo"
                         className="h-20 w-20 object-contain bg-gray-800 rounded-full p-3"
                     />
