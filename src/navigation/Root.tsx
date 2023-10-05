@@ -1,6 +1,5 @@
 import { Outlet } from "react-router-dom"
 import { Layout } from "./Layout"
-import { useTrackedStore } from "state/Store"
 
 export const Root = () => {
     return (
