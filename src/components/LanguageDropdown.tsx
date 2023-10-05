@@ -3,12 +3,12 @@ import { Badge, Dropdown } from "react-daisyui"
 import { SupportedLanguage } from "state/PreferencesStore"
 import { actions, store, useTrackedStore } from "state/Store"
 import { i18n } from "utils/i18n/translate"
+import { redirect } from "react-router-dom"
 
 type Props = {
     value: SupportedLanguage
 }
 const LanguageButtons: React.FC<Props> = ({ value }) => {
-    console.log(`LanguageButtons: ${value.code}`)
     return (
         <div className="flex flex-1">
             <Badge>{value.code.toLocaleUpperCase()}</Badge>
@@ -20,7 +20,9 @@ const LanguageButtons: React.FC<Props> = ({ value }) => {
 export const LanguageDropdown: React.FC = () => {
     const language = useTrackedStore().preferences.language()
     const supportedLanguages = store.preferences.supportedLanguages()
+    // const navigate = useNavigate()
     useEffect(() => {
+        console.log(`Setting language to: ${language}`)
         i18n.locale = language
     }, [language])
     return (
@@ -62,7 +64,9 @@ export const LanguageDropdown: React.FC = () => {
                 {supportedLanguages.map((value) => (
                     <Dropdown.Item
                         key={value.code}
-                        className={`${language === value.code ? "active" : ""}`}
+                        className={`${
+                            language === value.code ? "active" : ""
+                        } my-1`}
                         onClick={() => actions.preferences.language(value.code)}
                     >
                         <LanguageButtons value={value} />

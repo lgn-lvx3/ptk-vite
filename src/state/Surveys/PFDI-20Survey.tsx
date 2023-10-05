@@ -32,8 +32,8 @@ export class PFDI20Survey extends AbstractBaseSurvey {
             const options = set.options.map(
                 (o) => new BaseOption([o[0], o[1] as number]),
             )
-            console.log("options", options)
-            console.log("set", set)
+            // console.log("options", options)
+            // console.log("set", set)
             this.questionSets.push(
                 new BaseQuestionSet(
                     set.prompts,
@@ -53,8 +53,8 @@ export class PFDI20Survey extends AbstractBaseSurvey {
             const options = set.options.map(
                 (o) => new BaseOption([o[0], o[1] as number]),
             )
-            console.log("options", options)
-            console.log("set", set)
+            // console.log("options", options)
+            // console.log("set", set)
             this.questionSets.push(
                 new BaseQuestionSet(
                     set.prompts,
@@ -74,8 +74,8 @@ export class PFDI20Survey extends AbstractBaseSurvey {
             const options = set.options.map(
                 (o) => new BaseOption([o[0], o[1] as number]),
             )
-            console.log("options", options)
-            console.log("set", set)
+            // console.log("options", options)
+            // console.log("set", set)
             this.questionSets.push(
                 new BaseQuestionSet(
                     set.prompts,

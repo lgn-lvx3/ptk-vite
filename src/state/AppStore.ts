@@ -2,8 +2,19 @@ import { createStore } from "@udecode/zustood"
 import { IQuestion, IOption } from "state/ISurvey/ISurvey"
 import { ISurvey } from "state/ISurvey/ISurvey"
 
+export type SurveyNavTitles =
+    | "UDI6"
+    | "FIQL"
+    | "POPDI6"
+    | "CRAD8"
+    | "PFDI20"
+    | "IIQ7"
+    | "VFIS"
+    | "CCFIS"
+    | "PFIQ7"
+
 interface State {
-    surveyNavTitles: string[]
+    surveyNavTitles: SurveyNavTitles[]
     surveyInProgress: boolean
     surveyCompleted: boolean
     disclaimerAccepted: boolean
@@ -100,7 +111,7 @@ export const AppStore = createStore("App")(
             const selected = get.selected().length
             // calc total questions
 
-            console.log("isComplete", selected, total)
+            // console.log("isComplete", selected, total)
 
             if (selected === total) {
                 return true

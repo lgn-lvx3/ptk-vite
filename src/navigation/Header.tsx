@@ -1,18 +1,27 @@
-import React from "react"
-import { Navbar, Button, Menu, Avatar, Badge, Dropdown } from "react-daisyui"
-import { Link } from "react-router-dom"
+import React, { useEffect } from "react"
+import { Navbar, Dropdown } from "react-daisyui"
+import { Link, NavLink } from "react-router-dom"
 
-import logo from "/src/assets/logo.png"
 import { LanguageDropdown } from "components/LanguageDropdown"
-import { store } from "state/Store"
+import { store, useTrackedStore } from "state/Store"
 import { translate } from "utils/i18n"
 
 interface Props {
     title: string
 }
-
+// Header component that is used on all pages to display nav values
 export const Header: React.FC<Props> = ({ title }) => {
+    const language = useTrackedStore().preferences.language()
+    const survey = useTrackedStore().app.survey()
     const surveyNavTitles = store.app.surveyNavTitles()
+
+    const [surveyText, setSurveyText] = React.useState(
+        translate("navigation.surveys"),
+    )
+
+    useEffect(() => {
+        setSurveyText(translate("navigation.surveys"))
+    }, [language])
     return (
         <header>
             <Navbar className="shadow-lg rounded-lg mb-10">
@@ -23,19 +32,15 @@ export const Header: React.FC<Props> = ({ title }) => {
                         className="h-20 w-20 object-contain bg-gray-800 rounded-full p-3"
                     />
                 </Link>
-                {/* <Navbar.Center className="hidden lg:flex"></Navbar.Center> */}
-                <Navbar.End className="flex flex-1">
+                <Navbar.End className="flex flex-1 z-10">
                     {/* Navigation dropdown for surveys */}
                     <div>
-                        <Dropdown
-                            title={translate("navigation.surveys")}
-                            className="z-10"
-                        >
+                        <Dropdown title={surveyText} className="">
                             <Dropdown.Toggle
                                 className="btn btn-ghost rounded-btn"
                                 button={false}
                             >
-                                {translate("navigation.surveys")}
+                                {surveyText}
                                 {/* rome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
                                 <svg
                                     width="12px"
@@ -49,17 +54,19 @@ export const Header: React.FC<Props> = ({ title }) => {
                             </Dropdown.Toggle>
                             <Dropdown.Menu>
                                 {surveyNavTitles.map((title) => (
-                                    <Dropdown.Item key={title}>
-                                        <Link to={`surveys/${title}`}>
-                                            <Button
-                                                color="ghost"
-                                                variant="link"
-                                                size="sm"
-                                            >
-                                                {title}
-                                            </Button>
-                                        </Link>
-                                    </Dropdown.Item>
+                                    <Link to={`surveys/${title}`} key={title}>
+                                        <div
+                                            key={title}
+                                            className={`btn btn-ghost flex flex-1 ${
+                                                title ===
+                                                survey?.title.replace("-", "")
+                                                    ? "btn-active"
+                                                    : ""
+                                            }`}
+                                        >
+                                            {title}
+                                        </div>
+                                    </Link>
                                 ))}
                             </Dropdown.Menu>
                         </Dropdown>

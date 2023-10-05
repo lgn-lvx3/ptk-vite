@@ -4,18 +4,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import { useTheme } from "react-daisyui"
 import { store } from "state/Store"
 import { ErrorPage } from "navigation/ErrorPage"
-import { UDI6Page } from "navigation/UDI6Page"
 import { Root } from "navigation/Root"
-import { FIQLPage } from "navigation/FIQLPage"
-import { POPDI6Page } from "navigation/POPDI6Page"
-import { CRAD8Page } from "navigation/CRAD8Page"
-import { PFDI20Page } from "navigation/PFDI20Page"
-import { IIQ7Page } from "navigation/IIQ7Page"
-import { VFISPage } from "navigation/VFISPage"
-import { CCFISPage } from "navigation/CCFISPage"
-import { PFIQ7Page } from "navigation/PFIQ7Page"
 import { Home } from "navigation/Home"
-import { Surveys } from "navigation/Surveys"
+import { SurveysPage } from "navigation/SurveysPage"
+import { BaseSurveyPage } from "navigation/BaseSurveyPage"
 
 const router = createBrowserRouter([
     {
@@ -26,43 +18,43 @@ const router = createBrowserRouter([
             { index: true, element: <Home /> },
             {
                 path: "surveys",
-                element: <Surveys />,
+                element: <SurveysPage />,
             },
             {
                 path: "surveys/udi6",
-                element: <UDI6Page />,
+                element: <BaseSurveyPage name="UDI6" />,
             },
             {
                 path: "surveys/fiql",
-                element: <FIQLPage />,
+                element: <BaseSurveyPage name="FIQL" />,
             },
             {
                 path: "surveys/popdi6",
-                element: <POPDI6Page />,
+                element: <BaseSurveyPage name="POPDI6" />,
             },
             {
                 path: "surveys/crad8",
-                element: <CRAD8Page />,
+                element: <BaseSurveyPage name="CRAD8" />,
             },
             {
                 path: "surveys/pfdi20",
-                element: <PFDI20Page />,
+                element: <BaseSurveyPage name="PFDI20" />,
             },
             {
                 path: "surveys/iiq7",
-                element: <IIQ7Page />,
+                element: <BaseSurveyPage name="IIQ7" />,
             },
             {
                 path: "surveys/vfis",
-                element: <VFISPage />,
+                element: <BaseSurveyPage name="VFIS" />,
             },
             {
                 path: "surveys/ccfis",
-                element: <CCFISPage />,
+                element: <BaseSurveyPage name="CCFIS" />,
             },
             {
                 path: "surveys/pfiq7",
-                element: <PFIQ7Page />,
+                element: <BaseSurveyPage name="PFIQ7" />,
             },
         ],
     },

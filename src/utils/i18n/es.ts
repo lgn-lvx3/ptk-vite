@@ -11,9 +11,10 @@ const es = {
     disclaimer: {
         text: "Esta herramienta NO debe considerarse como un sustituto de ningún servicio médico profesional, NI como un sustituto del juicio clínico.",
         understand: "Entiendo",
+        score: "Puntuación",
+        download: "Descargar",
+        share: "Compartir",
     },
-    download: "Descargar",
-    share: "Compartir",
     IIQ7: {
         title: "IIQ-7",
         subtitle: "Cuestionario de Impacto de la Incontinencia",
@@ -127,7 +128,7 @@ const es = {
             content: [""],
         },
     },
-    OPDI6: {
+    POPDI6: {
         title: "POPDI-6",
         subtitle: "Inventario de Molestias por Prolapso de Órganos Pélvicos",
         instructions: [""],

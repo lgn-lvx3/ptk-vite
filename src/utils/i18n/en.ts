@@ -11,9 +11,10 @@ const en = {
     disclaimer: {
         text: "This tool should NOT be considered as a substitute for any professional medical service, NOR as a substitute for clinical judgment.",
         understand: "I understand",
+        score: "Score",
+        download: "Download",
+        share: "Share",
     },
-    download: "Download",
-    share: "Share",
     IIQ7: {
         title: "IIQ-7",
         subtitle: "Incontinence Impact Questionnaire",
