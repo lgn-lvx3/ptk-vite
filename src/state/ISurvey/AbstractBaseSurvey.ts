@@ -8,7 +8,6 @@ import {
     ISurveySection,
     IOption,
 } from "./ISurvey"
-import { s } from "vitest/dist/reporters-5f784f42.js"
 
 export abstract class AbstractBaseSurvey implements ISurvey {
     id: string
@@ -21,6 +20,8 @@ export abstract class AbstractBaseSurvey implements ISurvey {
 
     completedScore: number | undefined
     abstract maxScore: number | undefined
+    totalScore: number | undefined
+    averageScore: number | undefined
 
     selected: IQuestion[]
     completed: boolean
@@ -75,9 +76,11 @@ export abstract class AbstractBaseSurvey implements ISurvey {
             ) as unknown as ISurveySection,
         }
         this.completed = false
+        this.totalScore = 0
+        this.averageScore = 0
         this.selected = []
     }
-    abstract calculateScore(): void
+    abstract calculateScore(): number
 
     selectOption(question: IQuestion, option: IOption): void {
         // if exists in selected, replace

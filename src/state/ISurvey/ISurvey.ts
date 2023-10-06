@@ -27,6 +27,11 @@ export interface ISurvey {
     /** The maximum possible score for the survey. */
     maxScore: number | undefined
 
+    /** The maximum possible score for the survey. */
+    totalScore: number | undefined
+
+    averageScore: number | undefined
+
     /** The list of selected questions for the survey. */
     selected: IQuestion[]
 
@@ -34,7 +39,7 @@ export interface ISurvey {
     completed: boolean
 
     /** Calculates the score for the entirety survey. */
-    calculateScore(): void
+    calculateScore(): number
 
     /**
      * Selects an option for a question in the survey.

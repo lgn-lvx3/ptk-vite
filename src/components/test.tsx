@@ -8,24 +8,16 @@ describe("<App />", () => {
 
         expect(
             screen.getByRole("heading", {
-                name: /Welcome!/i,
+                name: "Pelvic Toolkit Calculators",
                 level: 1,
             }),
         ).toBeInTheDocument()
 
         expect(
             screen.getByText(
-                /This is a boilerplate build with Vite, React 18, TypeScript, Vitest, Testing Library, TailwindCSS 3, Eslint and Prettier./i,
+                /Accurate outcome measures for calculating Pelvic analysis for patients./i,
             ),
         ).toBeInTheDocument()
-
-        expect(
-            screen.getByRole("link", {
-                name: /start building for free/i,
-            }),
-        ).toBeInTheDocument()
-
-        expect(screen.getByRole("img")).toBeInTheDocument()
 
         expect(container.firstChild).toBeInTheDocument()
     })
