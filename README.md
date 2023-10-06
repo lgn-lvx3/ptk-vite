@@ -1,27 +1,44 @@
-![reactjs-vite-tailwindcss-boilerplate](https://user-images.githubusercontent.com/16243531/217138979-b854309c-4742-4275-a705-f9fec5158217.jpg)
+# Pelvic Toolkit Calculators
 
-# React Tailwindcss Boilerplate build with Vite
+This project contains outcome measurements for pelvic surveys.
 
-This is a boilerplate build with Vite, React 18, TypeScript, Vitest, Testing Library, TailwindCSS 3, Eslint and Prettier.
+Currently deployed on [ptk.lvx3.com](https://ptk.lvx3.com)
 
-## What is inside?
-
-This project uses many tools like:
-
-- [Vite](https://vitejs.dev)
+# Frameworks Used
+## Core
 - [ReactJS](https://reactjs.org)
 - [TypeScript](https://www.typescriptlang.org)
+
+## Builds and Testing
+- [Vite](https://vitejs.dev)
 - [Vitest](https://vitest.dev)
 - [Testing Library](https://testing-library.com)
+
+## State Management
+- [Zustood](https://github.com/udecode/zustood)
+
+## Routing
+- [react-router-dom](https://reactrouter.com/en/main)
+
+## Styling
 - [Tailwindcss](https://tailwindcss.com)
-- [Eslint](https://eslint.org)
-- [Prettier](https://prettier.io)
+- [daisyUI](https://daisyui.com/)
+- [auto-animate](https://auto-animate.formkit.com/)
 
-## Getting Started
+## PDF Generation
+- [@react-pdf/renderer](https://github.com/diegomura/react-pdf)
 
-### Install
+## Translations
+- [i18n-js](https://github.com/fnando/i18n-js)
 
-Create the project.
+## Deployment
+- [Azure-SWA](https://learn.microsoft.com/en-us/azure/static-web-apps/overview)
+
+
+## Build Pipeline
+The project is built and deployed using the azure static web apps flow from GitHub actions.
+
+## Installing / Using the project
 
 ```bash
 npx degit joaopaulomoraes/reactjs-vite-tailwindcss-boilerplate my-app
@@ -36,45 +53,41 @@ cd my-app
 Install dependencies.
 
 ```bash
-pnpm install
+yarn install
 ```
 
 Serve with hot reload at <http://localhost:5173>.
 
 ```bash
-pnpm run dev
+yarn dev
 ```
 
 ### Lint
 
 ```bash
-pnpm run lint
+yarn lint
 ```
 
 ### Typecheck
 
 ```bash
-pnpm run typecheck
+yarn typecheck
 ```
 
 ### Build
 
 ```bash
-pnpm run build
+yarn build
 ```
 
 ### Test
 
 ```bash
-pnpm run test
+yarn test
 ```
 
 View and interact with your tests via UI.
 
 ```bash
-pnpm run test:ui
+yarn test:ui
 ```
-
-## License
-
-This project is licensed under the MIT License.

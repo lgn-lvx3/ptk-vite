@@ -1,16 +1,11 @@
 {
-    "name": "reactjs-vite-tailwindcss-boilerplate",
-    "description": "This is a boilerplate build with Vite, React 18, TypeScript, Vitest, Testing Library, TailwindCSS 3, Eslint and Prettier.",
+    "name": "ptk",
+    "description": "Pelvic Toolkit Calculators Web App",
     "version": "0.1.0",
     "private": true,
     "author": {
-        "name": "João Paulo Moraes",
-        "email": "joaopaulomoraes@outlook.com",
-        "url": "https://github.com/joaopaulomoraes"
-    },
-    "bugs": {
-        "url": "https://github.com/joaopaulomoraes/reactjs-vite-tailwindcss-boilerplate/issues",
-        "email": "joaopaulomoraes@outlook.com"
+        "name": "Logan Hendershot",
+        "email": "logan@lvx3.com"
     },
     "scripts": {
         "dev": "vite",
@@ -18,7 +13,6 @@
         "serve": "vite preview",
         "test": "vitest",
         "test:ui": "vitest --ui",
-        "lint": "eslint src --max-warnings=0",
         "typecheck": "tsc --project tsconfig.json --noEmit"
     },
     "dependencies": {

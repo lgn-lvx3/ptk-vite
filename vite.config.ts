@@ -12,4 +12,7 @@ export default defineConfig({
         setupFiles: ".vitest/setup",
         include: ["**/*.test.{ts,tsx}", "**/*test.{ts,tsx}"],
     },
+    define: {
+        APP_VERSION: JSON.stringify(process.env.npm_package_version),
+    },
 })
