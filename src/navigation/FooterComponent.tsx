@@ -5,18 +5,18 @@ import { CalculatorIcon } from "@heroicons/react/24/outline"
 
 export const FooterComponent = () => {
     return (
-        <Footer className="p-10 bg-neutral text-neutral-content rounded-lg mt-10">
-            <div className="flex flex-1 flex-col justify-center items-center">
+        <Footer className="grid grid-cols-2 sm:grid-cols-4 p-5 bg-neutral text-neutral-content mt-10 rounded-t-lg">
+            <div className="">
                 {/* rome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
                 <CalculatorIcon width={50} height={50} />
-                <p className="text-center">
+                <p className="">
                     pelvictoolkit.com
                     <br />
                     &copy; {new Date().getFullYear()} All rights reserved.
                 </p>
             </div>
 
-            <div>
+            <div className="">
                 <Footer.Title>Surveys</Footer.Title>
                 <Link to="/surveys">Surveys →</Link>
             </div>
