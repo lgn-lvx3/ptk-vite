@@ -7,6 +7,7 @@ import { store, useTrackedStore } from "state/Store"
 import { translate } from "utils/i18n"
 
 import logo from "/src/assets/logo.png"
+import ThemeSwitcher from "components/ThemeSwitcher"
 
 interface Props {
     title: string
@@ -34,7 +35,10 @@ export const HeaderComponent: React.FC<Props> = ({ title }) => {
                         className="h-20 w-20 object-contain bg-gray-800 rounded-full p-3"
                     />
                 </Link>
-                <Navbar.End className="flex flex-1 z-10">
+                <Navbar.End className="flex flex-1 z-10 gap-5">
+                    <div>
+                        <ThemeSwitcher />
+                    </div>
                     {/* Navigation dropdown for surveys */}
                     <div>
                         <Dropdown title={surveyText} className="">
@@ -72,6 +76,8 @@ export const HeaderComponent: React.FC<Props> = ({ title }) => {
                                 ))}
                             </Dropdown.Menu>
                         </Dropdown>
+                    </div>
+                    <div>
                         {/* language switcher component */}
                         <LanguageDropdown />
                     </div>
