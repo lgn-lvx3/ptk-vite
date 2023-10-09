@@ -146,7 +146,7 @@ const SurveyResults = ({ survey }: Props) => {
                         const pdfBlob = await pdf(<PDFSurvey />).toBlob()
                         if (!navigator?.share) {
                             // throw snackbar error
-                            throw new Error("Sharing not supported by browser.")
+                            throw new Error(translate("errors.sharing"))
                         }
 
                         const pdfFile = new File(
@@ -158,7 +158,7 @@ const SurveyResults = ({ survey }: Props) => {
                         )
 
                         if (!navigator?.canShare({ files: [pdfFile] })) {
-                            throw new Error("Browser cannot share file.")
+                            throw new Error(translate("errors.file"))
                         }
 
                         // console.log("attempting to share", pdfFile)

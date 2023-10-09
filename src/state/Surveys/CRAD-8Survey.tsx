@@ -16,15 +16,15 @@ export class CRAD8Survey extends AbstractBaseSurvey {
         super("CRAD8")
     }
 
-    calculateScore(): void {
-        if (this.selected.length !== this.getQuestionLength()) {
-            throw new Error("Not all questions have been answered")
+    calculateScore(): number {
+        if (this.selected.length !== this.getTotalQuestionLength()) {
+            throw new Error("Please answer all questions")
         }
 
         // calculate the total score by summing the scores of the selected options
         this.completedScore = this.selected.reduce((acc, curr) => {
             if (!curr.selectedAnswer) {
-                throw new Error("Not all questions have been answered")
+                throw new Error("Please answer all questions")
             }
             return acc + (curr.selectedAnswer.optionTuple[1] || 0)
         }, 0)
@@ -39,5 +39,6 @@ export class CRAD8Survey extends AbstractBaseSurvey {
         this.completedScore = Math.round(this.completedScore)
 
         this.completed = true
+        return this.completedScore
     }
 }

@@ -19,7 +19,7 @@ interface Props {
 export const BaseSurveyPage: React.FC<Props> = ({ name }) => {
     const language = useTrackedStore().preferences.language()
 
-    const handleNameChange = (name: SurveyNavTitles) => {
+    const handleSurveyChange = (name: SurveyNavTitles) => {
         switch (name) {
             case "UDI6":
                 actions.app.survey(new UDI6Survey())
@@ -57,7 +57,7 @@ export const BaseSurveyPage: React.FC<Props> = ({ name }) => {
     }
 
     useEffect(() => {
-        handleNameChange(name)
+        handleSurveyChange(name)
     }, [name, language])
 
     return <BaseSurvey />

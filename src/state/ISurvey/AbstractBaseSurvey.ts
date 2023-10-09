@@ -94,11 +94,30 @@ export abstract class AbstractBaseSurvey implements ISurvey {
             this.selected.push(question)
         }
     }
-    getQuestionLength(): number {
+    getTotalQuestionLength(): number {
         return this.questionSets.reduce(
             (acc, curr) => acc + curr.questions.length,
             0,
         )
+    }
+
+    calculateMaxScore(): number {
+        let maxScore = 0
+        this.questionSets.forEach((questionSet) => {
+            // find the highest score in the tuple
+            questionSet.questions.forEach((question) => {
+                let maxTuple = 0
+                question.options.forEach((option) => {
+                    if (option.optionTuple[1] > maxTuple) {
+                        maxTuple = option.optionTuple[1]
+                    }
+                })
+                console.log("maxTuple", maxTuple)
+                maxScore += maxTuple
+            })
+        })
+        console.log("maxScore", maxScore)
+        return maxScore
     }
 }
 

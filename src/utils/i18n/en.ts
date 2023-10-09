@@ -15,6 +15,12 @@ const en = {
         download: "Download",
         share: "Share",
     },
+    errors: {
+        calculate: "Please answer all questions.",
+        sharing: "Your browser doesn't allow sharing.",
+        file: "Your browser can't share this file.",
+        content: "Please answer all questions.",
+    },
     IIQ7: {
         title: "IIQ-7",
         subtitle: "Incontinence Impact Questionnaire",

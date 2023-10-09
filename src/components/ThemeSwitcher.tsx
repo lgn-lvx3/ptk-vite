@@ -1,10 +1,13 @@
 import { FC, useEffect } from "react"
-import { Button, Toggle, useTheme } from "react-daisyui"
+import { Button, useTheme } from "react-daisyui"
 import { actions, useTrackedStore } from "state/Store"
 
+/**
+ * A component that allows the user to switch between light and dark themes.
+ */
 export const ThemeSwitcher: FC = () => {
     const userTheme = useTrackedStore().preferences.theme()
-    const { theme, setTheme } = useTheme(userTheme)
+    const { setTheme } = useTheme(userTheme)
 
     useEffect(() => {
         setTheme(userTheme)

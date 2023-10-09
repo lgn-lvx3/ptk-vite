@@ -33,23 +33,25 @@ export class UDI6Survey extends AbstractBaseSurvey {
     }
 
     calculateScore(): number {
-        if (this.selected.length !== this.getQuestionLength()) {
-            throw new Error("Not all questions have been answered")
+        if (this.selected.length !== this.getTotalQuestionLength()) {
+            throw new Error("Please answer all questions")
         }
 
         // calculate the total score by summing the scores of the selected options
         this.totalScore = this.selected.reduce((acc, curr) => {
             if (!curr.selectedAnswer) {
-                throw new Error("Not all questions have been answered")
+                throw new Error("Please answer all questions")
             }
             return acc + (curr.selectedAnswer.optionTuple[1] || 0)
         }, 0)
 
-        // calculate the average
+        const maxScore = this.calculateMaxScore()
+
+        // calculate the average score
         this.averageScore = this.totalScore / this.selected.length
 
-        // round it to the nearest integer and multiply
-        this.completedScore = Math.round(this.averageScore) * 25
+        // round it to the nearest integer and multiply to get a scale of 100
+        this.completedScore = Math.round((this.totalScore / maxScore) * 100)
 
         this.completed = true
 

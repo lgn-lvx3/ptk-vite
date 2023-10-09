@@ -28,11 +28,11 @@ describe("UDI6Survey", () => {
     describe("calculateScore", () => {
         it("should throw an error if no questions have been answered", () => {
             expect(() => survey.calculateScore()).toThrowError(
-                "Not all questions have been answered",
+                "Please answer all questions",
             )
         })
 
-        it("should throw an error if not all questions have been answered", () => {
+        it("should throw an error if Please answer all questions", () => {
             survey.selected = [
                 {
                     id: 0,
@@ -42,7 +42,7 @@ describe("UDI6Survey", () => {
                 },
             ]
             expect(() => survey.calculateScore()).toThrowError(
-                "Not all questions have been answered",
+                "Please answer all questions",
             )
         })
 
@@ -108,10 +108,8 @@ describe("UDI6Survey", () => {
             }, 0)
 
             // calculate the average
-            const averageScore = totalScore / survey.selected.length
-
             // round it to the nearest integer and multiply
-            const completedScore = Math.round(averageScore) * 25
+            const completedScore = Math.round((totalScore / 18) * 100)
 
             expect(survey.calculateScore()).toBe(completedScore)
         })

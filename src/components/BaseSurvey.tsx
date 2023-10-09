@@ -8,8 +8,6 @@ import { SurveyScore } from "./SurveyScore"
 import autoAnimate from "@formkit/auto-animate"
 import { IOption, IQuestion, IQuestionSet } from "state/ISurvey/ISurvey"
 import { useSnackbar } from "notistack"
-import { PDFRenderer, PDFViewer } from "@react-pdf/renderer"
-import { PDFSurvey } from "./PDFSurvey"
 
 interface Props {
     questionSet: IQuestionSet

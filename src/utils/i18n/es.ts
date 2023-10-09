@@ -15,6 +15,12 @@ const es = {
         download: "Descargar",
         share: "Compartir",
     },
+    errors: {
+        calculate: "Errores",
+        sharing: "Tu navegador no permite compartir.",
+        file: "Tu navegador no puede compartir este archivo.",
+        content: "Por favor, responde a todas las preguntas.",
+    },
     IIQ7: {
         title: "IIQ-7",
         subtitle: "Cuestionario de Impacto de la Incontinencia",

@@ -48,7 +48,7 @@ export interface ISurvey {
      */
     selectOption(question: IQuestion, option: IOption): void
 
-    getQuestionLength(): number
+    getTotalQuestionLength(): number
 }
 
 /**
