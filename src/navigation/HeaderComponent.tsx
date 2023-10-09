@@ -12,7 +12,7 @@ interface Props {
     title: string
 }
 // Header component that is used on all pages to display nav values
-export const Header: React.FC<Props> = ({ title }) => {
+export const HeaderComponent: React.FC<Props> = ({ title }) => {
     const language = useTrackedStore().preferences.language()
     const survey = useTrackedStore().app.survey()
     const surveyNavTitles = store.app.surveyNavTitles()
