@@ -6,7 +6,7 @@ export type SupportedLanguage = {
 }
 
 interface State {
-    theme: "light" | "dark"
+    theme: string
     supportedLanguages: SupportedLanguage[]
     language: string
 }

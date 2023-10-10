@@ -19,8 +19,8 @@ export const QuestionSetInstructions: React.FC<Props> = ({ questionSet }) => {
 
     return (
         <div className="mb-10 w-full">
-            <h4 className="text-slate-400 text-right">{questionSet.title}</h4>
-            <h4 className="text-slate-400 uppercase text-sm text-right">
+            <h4 className="text-base-300 text-right">{questionSet.title}</h4>
+            <h4 className="text-base-300 uppercase text-sm text-right">
                 {questionSet.subtitle}
             </h4>
 
@@ -119,7 +119,7 @@ export const BaseSurvey: React.FC = () => {
                     <Card.Title className="uppercase">
                         <h1 className="">{survey.title}</h1>
                     </Card.Title>
-                    <Card.Title className="uppercase text-sm text-slate-400">
+                    <Card.Title className="uppercase text-sm text-base-300">
                         {survey.subtitle}
                     </Card.Title>
                     {/* survey instructions */}

@@ -124,7 +124,7 @@ const SurveyResults = ({ survey }: Props) => {
             }
         >
             <div className="prose">
-                <h1 className="text-success-content">
+                <h1 className="text-base-content">
                     {scoreText}: {survey?.completedScore} / {survey?.maxScore}
                 </h1>
             </div>

@@ -31,7 +31,7 @@ export const SurveysPage: React.FC = () => {
                         <Card className="hover:bg-base-200">
                             <Card.Body>
                                 <Card.Title>{surveyText.title} →</Card.Title>
-                                <p className="uppercase text-sm text-slate-400">
+                                <p className="uppercase text-sm text-base-300">
                                     {surveyText.subtitle}
                                 </p>
                             </Card.Body>

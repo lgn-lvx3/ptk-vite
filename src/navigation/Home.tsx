@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { Hero, Button } from "react-daisyui"
-import { i18n, translate } from "utils/i18n"
-import { useStore, useTrackedStore } from "state/Store"
+import { translate } from "utils/i18n"
+import { useTrackedStore } from "state/Store"
 import { useEffect, useState } from "react"
 
 import logo from "/src/assets/calculator-logo.png"

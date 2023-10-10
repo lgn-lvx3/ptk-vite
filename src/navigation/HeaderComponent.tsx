@@ -28,14 +28,17 @@ export const HeaderComponent: React.FC<Props> = ({ title }) => {
     return (
         <header>
             <Navbar className="shadow-lg rounded-lg mb-10">
-                <Link to="/">
-                    <img
-                        src={logo}
-                        alt="Logo"
-                        className="h-20 w-20 object-contain bg-gray-800 rounded-full p-3"
-                    />
-                </Link>
-                <Navbar.End className="flex flex-1 z-10 gap-5">
+                <div className="hidden md:flex">
+                    <Link to="/">
+                        <img
+                            src={logo}
+                            alt="Logo"
+                            className="h-20 w-20 object-contain bg-gray-800 rounded-full p-3 "
+                        />
+                    </Link>
+                </div>
+                {/* Dropdown Components */}
+                <div className="flex flex-1 justify-end z-10 gap-3">
                     <div>
                         <ThemeSwitcher />
                     </div>
@@ -81,7 +84,7 @@ export const HeaderComponent: React.FC<Props> = ({ title }) => {
                         {/* language switcher component */}
                         <LanguageDropdown />
                     </div>
-                </Navbar.End>
+                </div>
             </Navbar>
         </header>
     )
