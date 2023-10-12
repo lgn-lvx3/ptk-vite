@@ -2,7 +2,9 @@
 // takes in the number of questions and the options
 // to be used for each question. The scale is the values
 
-import { BaseOption, BaseQuestion } from "state/ISurvey/AbstractBaseSurvey"
+import { BaseOption } from "state/ISurvey/BaseOption"
+import { BaseQuestion } from "state/ISurvey/BaseQuestion"
+import { IScale } from "state/ISurvey/IScale"
 
 /**
  * Generates an array of BaseQuestion objects with the specified number of questions and options.
@@ -13,6 +15,7 @@ import { BaseOption, BaseQuestion } from "state/ISurvey/AbstractBaseSurvey"
 export const generateBaseQuestions = (
     questionsTotal: number,
     optionScale: number[],
+    scales: IScale[],
 ) => {
     const selected = []
     // generate options
@@ -20,7 +23,14 @@ export const generateBaseQuestions = (
         return new BaseOption([scale.toString(), scale])
     })
     for (let i = 0; i < questionsTotal; i++) {
-        selected.push(new BaseQuestion(`Q${i}:`, options))
+        // randomly select a scale
+        const scale = scales[Math.floor(Math.random() * scales.length)]
+        selected.push(
+            new BaseQuestion(
+                { text: `Question ${i} Prompt`, scaleId: scale.id },
+                options,
+            ),
+        )
     }
     return selected
 }

@@ -10,64 +10,34 @@ import { translate } from "utils/i18n"
  * @implements {ISurvey}
  */
 export class FIQLSurvey extends AbstractBaseSurvey {
-    maxScore = 100
-
     constructor() {
         super("FIQL")
+        this.scales = [
+            {
+                id: 1,
+                name: "Lifestyle",
+            },
+            {
+                id: 2,
+                name: "Coping/Behavior",
+            },
+            {
+                id: 3,
+                name: "Depression/Self Perception",
+            },
+            {
+                id: 4,
+                name: "Embarrassment",
+            },
+        ]
     }
 
-    calculateScore(): number {
+    calculateScore(): void {
         if (this.selected.length !== this.getTotalQuestionLength()) {
             throw new Error(translate("errors.calculate"))
         }
 
-        // calculate the total score by summing the scores of the selected options
-        // this.completedScore = this.selected.reduce((acc, curr) => {
-        //     if (!curr.selectedAnswer) {
-        //         throw new Error(translate("errors.calculate"))
-        //     }
-        //     return acc + (curr.selectedAnswer.optionTuple[1] || 0)
-        // }, 0)
-
-        let score = 0
-        let notApplicableCount = 0
-
-        // we calculate the score and the number of not applicable questions
-        this.selected.forEach((question) => {
-            if (!question.selectedAnswer) {
-                throw new Error(translate("errors.calculate"))
-            }
-            // don't add the score if the option is "not applicable"
-            if (question.selectedAnswer.optionTuple[0] !== "N/A") {
-                score += question.selectedAnswer.optionTuple[1]
-            } else {
-                notApplicableCount++
-            }
-        })
-
-        // calculate the max score possible
-        this.maxScore = this.calculateMaxScore()
-
-        // set total score
-        this.totalScore = score
-
-        // now we calculate the average score
-        // we subtract the number of not applicable questions from the total number of questions
-        // and get the average score
-        this.averageScore = Math.round(
-            score / (this.selected.length - notApplicableCount),
-        )
-
-        // calculate the average
-
-        // // convert to % of 100
-        // this.completedScore = this.completedScore * 25
-
-        // round it to the nearest integer
-        this.completedScore = this.averageScore
-
+        this.calculateScaleScores()
         this.completed = true
-
-        return this.completedScore
     }
 }

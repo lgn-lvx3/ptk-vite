@@ -1,7 +1,7 @@
 import { FC, useEffect } from "react"
-import { Button, Dropdown, Link, Menu, useTheme } from "react-daisyui"
+import { Dropdown, useTheme } from "react-daisyui"
 import { Themes } from "state/AppStore"
-import { actions, useTrackedStore } from "state/Store"
+import { useTrackedStore } from "state/Store"
 import { ThemeItem } from "./ThemeItem"
 
 /**

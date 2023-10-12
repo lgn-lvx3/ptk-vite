@@ -1,3 +1,5 @@
+import { IScale } from "./IScale"
+
 /**
  * @description Interface for a survey, which contains a title, subtitle, instructions, and a list of questions. Can contain several sub question sets.
  * @author Logan Hendershot
@@ -13,6 +15,8 @@ export interface ISurvey {
     title: string
     subtitle: string
 
+    scales: IScale[]
+
     surveyInstructions?: string[]
 
     // A set of one or more question sections to be displayed in the survey.
@@ -21,17 +25,6 @@ export interface ISurvey {
     /** The post-survey sections. */
     postSurvey: IPostSurvey
 
-    /** The total score for the survey. */
-    completedScore: number | undefined
-
-    /** The maximum possible score for the survey. */
-    maxScore: number | undefined
-
-    /** The maximum possible score for the survey. */
-    totalScore: number | undefined
-
-    averageScore: number | undefined
-
     /** The list of selected questions for the survey. */
     selected: IQuestion[]
 
@@ -39,7 +32,7 @@ export interface ISurvey {
     completed: boolean
 
     /** Calculates the score for the entirety survey. */
-    calculateScore(): number
+    calculateScore(): void
 
     /**
      * Selects an option for a question in the survey.
@@ -127,10 +120,16 @@ export interface IOption {
 export interface IQuestion {
     /** The unique identifier of the question. */
     id: number
-    /** The text of the question. */
-    prompt: string
+    /** The text and scaleID of the question. */
+    prompt: Prompt
+
     /** The selected option of the question, if any. */
     selectedAnswer: IOption | undefined
     /** The available options for the question. */
     options: IOption[]
+}
+
+export type Prompt = {
+    text: string
+    scaleId: number
 }

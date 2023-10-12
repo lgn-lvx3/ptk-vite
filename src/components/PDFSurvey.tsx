@@ -144,7 +144,6 @@ const Section: React.FC<{
 
 export const PDFSurvey: React.FC = () => {
     const survey = store.app.survey()
-    const score = store.app.score()
 
     if (!survey) {
         return null
@@ -185,7 +184,7 @@ export const PDFSurvey: React.FC = () => {
                                     style={styles.answerRow}
                                 >
                                     <Text style={styles.question}>
-                                        {question.prompt}
+                                        {question.prompt.text}
                                     </Text>
                                     <Text style={styles.answer}>
                                         {
@@ -217,9 +216,17 @@ export const PDFSurvey: React.FC = () => {
                         >
                             Total Score
                         </Text>
-                        <Text style={styles.title}>
-                            {score ?? 0} / {survey.maxScore}
-                        </Text>
+                        {survey.scales.map((scale) => (
+                            <View key={scale.id} style={styles.answerRow}>
+                                <Text style={styles.question}>
+                                    {scale.name}
+                                </Text>
+                                <Text style={styles.answer}>Score</Text>
+                                <Text style={styles.value}>
+                                    {scale.percentageScore} / 100
+                                </Text>
+                            </View>
+                        ))}
                     </View>
                 </View>
             </Page>

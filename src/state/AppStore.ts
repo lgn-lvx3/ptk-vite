@@ -1,6 +1,7 @@
 import { createStore } from "@udecode/zustood"
 import { IQuestion, IOption } from "state/ISurvey/ISurvey"
 import { ISurvey } from "state/ISurvey/ISurvey"
+import { IScale } from "./ISurvey/IScale"
 
 export type SurveyNavTitles =
     | "UDI6"
@@ -52,7 +53,7 @@ interface State {
     disclaimerAccepted: boolean
     survey: ISurvey | undefined
     selected: IQuestion[]
-    score: number | undefined
+    scaleScores: IScale[]
     renderPDF: boolean
 }
 
@@ -73,7 +74,7 @@ const initialState: State = {
     disclaimerAccepted: false,
     survey: undefined,
     selected: [],
-    score: undefined,
+    scaleScores: [],
     renderPDF: false,
 }
 
@@ -89,7 +90,7 @@ export const AppStore = createStore("App")(
             const survey = get.survey()
             if (survey) {
                 survey.calculateScore()
-                set.score(survey.completedScore)
+                set.scaleScores(survey.scales)
                 set.renderPDF(true)
             }
         },

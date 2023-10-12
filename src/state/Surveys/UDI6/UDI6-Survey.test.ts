@@ -1,9 +1,14 @@
 import { UDI6Survey } from "./UDI6-Survey"
 import { generateBaseQuestions } from "utils/TestHelpers"
 
-const surveyMaxScore = 100
 const questionsTotal = 6
 const optionScale = [0, 1, 2, 3]
+const scales = [
+    {
+        id: 1,
+        name: "UDI-6 Scale Score",
+    },
+]
 
 describe("UDI6Survey", () => {
     let survey: UDI6Survey
@@ -19,10 +24,6 @@ describe("UDI6Survey", () => {
         it("should set the survey subtitle", () => {
             expect(survey.subtitle).toBe("Urogenital Distress Inventory")
         })
-
-        it("should set the max score to 100", () => {
-            expect(survey.maxScore).toBe(surveyMaxScore)
-        })
     })
 
     describe("calculateScore", () => {
@@ -32,11 +33,11 @@ describe("UDI6Survey", () => {
             )
         })
 
-        it("should throw an error if Please answer all questions", () => {
+        it("should throw an error if not some but not all questions answered", () => {
             survey.selected = [
                 {
                     id: 0,
-                    prompt: "Test",
+                    prompt: { text: "Test", scaleId: 0 },
                     selectedAnswer: undefined,
                     options: [],
                 },
@@ -46,13 +47,14 @@ describe("UDI6Survey", () => {
             )
         })
 
-        it("should calculate the total score by summing the scores of the selected options", () => {
-            const totalScore = 18
+        it("should calculate the maxScore of each scale", () => {
+            const maxScaleScore = 18
 
             // generate 6 questions with 4 options each
             const baseQuestions = generateBaseQuestions(
                 questionsTotal,
                 optionScale,
+                scales,
             )
 
             baseQuestions.forEach((question) => {
@@ -60,59 +62,60 @@ describe("UDI6Survey", () => {
                 survey.selected.push(question)
             })
 
-            survey.calculateScore()
-
-            expect(survey.totalScore).toBe(totalScore)
-        })
-
-        it("should calc the average score by getting total and dividing by length of questions", () => {
-            const targetScore = 2
-
-            // generate 6 questions with 4 options each
-            const baseQuestions = generateBaseQuestions(
-                questionsTotal,
-                optionScale,
-            )
-
-            // set their selected answer to the 3rd option
-            baseQuestions.forEach((question) => {
-                question.selectedAnswer = question.options[2]
-                survey.selected.push(question)
+            survey.calculateMaxScaleScores()
+            survey.scales.forEach((scale) => {
+                expect(scale.maxScore).toBe(maxScaleScore)
             })
-
-            survey.calculateScore()
-
-            expect(survey.averageScore).toBe(targetScore)
         })
 
-        it("should calc the completed score", () => {
-            // generate 6 questions with 4 options each
-            const baseQuestions = generateBaseQuestions(
-                questionsTotal,
-                optionScale,
-            )
+        // it("should calc the average score by getting total and dividing by length of questions", () => {
+        //     const targetScore = 2
 
-            // set their selected answer to the 3rd option
-            baseQuestions.forEach((question) => {
-                // select options at random for each question
-                const randomIndex = Math.floor(
-                    Math.random() * question.options.length,
-                )
-                question.selectedAnswer = question.options[randomIndex]
-                survey.selected.push(question)
-            })
+        //     // generate 6 questions with 4 options each
+        //     const baseQuestions = generateBaseQuestions(
+        //         questionsTotal,
+        //         optionScale,
+        //     )
 
-            // calculate what the score should be
-            const totalScore = survey.selected.reduce((acc, curr) => {
-                return acc + (curr.selectedAnswer?.optionTuple[1] || 0)
-            }, 0)
+        //     // set their selected answer to the 3rd option
+        //     baseQuestions.forEach((question) => {
+        //         question.selectedAnswer = question.options[2]
+        //         survey.selected.push(question)
+        //     })
 
-            // calculate the average
-            // round it to the nearest integer and multiply
-            const completedScore = Math.round((totalScore / 18) * 100)
+        //     survey.calculateScore()
 
-            expect(survey.calculateScore()).toBe(completedScore)
-        })
+        //     expect(survey.averageScore).toBe(targetScore)
+        // })
+
+        // it("should calc the completed score", () => {
+        //     // generate 6 questions with 4 options each
+        //     const baseQuestions = generateBaseQuestions(
+        //         questionsTotal,
+        //         optionScale,
+        //     )
+
+        //     // set their selected answer to the 3rd option
+        //     baseQuestions.forEach((question) => {
+        //         // select options at random for each question
+        //         const randomIndex = Math.floor(
+        //             Math.random() * question.options.length,
+        //         )
+        //         question.selectedAnswer = question.options[randomIndex]
+        //         survey.selected.push(question)
+        //     })
+
+        //     // calculate what the score should be
+        //     const totalScore = survey.selected.reduce((acc, curr) => {
+        //         return acc + (curr.selectedAnswer?.optionTuple[1] || 0)
+        //     }, 0)
+
+        //     // calculate the average
+        //     // round it to the nearest integer and multiply
+        //     const completedScore = Math.round((totalScore / 18) * 100)
+
+        //     expect(survey.calculateScore()).toBe(completedScore)
+        // })
     })
 
     //     it("should calculate the total score by summing the scores of the selected options", () => {

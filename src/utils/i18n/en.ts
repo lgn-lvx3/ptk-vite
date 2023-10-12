@@ -1,4 +1,6 @@
-const en = {
+import { SurveyTranslationType } from "state/ISurvey/SurveyTranslationType"
+
+const en: SurveyTranslationType = {
     hero: {
         title: "Pelvic Toolkit Calculators",
         subtitle:
@@ -200,12 +202,30 @@ const en = {
                     "For each question, circle the number that best describes this problem for you over the past month:",
                 ],
                 prompts: [
-                    "Frequent urination?",
-                    "Urine leakage related to the feeling of urgency?",
-                    "Urine leakage related to physical activity, coughing or sneezing?",
-                    "Small amounts of urine leakage (that is drops)?",
-                    "Difficulty emptying your bladder?",
-                    "Pain or discomfort in the lower abdominal or genital area?",
+                    {
+                        text: "Frequent urination?",
+                        scaleId: 1,
+                    },
+                    {
+                        text: "Urine leakage related to the feeling of urgency?",
+                        scaleId: 1,
+                    },
+                    {
+                        text: "Urine leakage related to physical activity, coughing or sneezing?",
+                        scaleId: 1,
+                    },
+                    {
+                        text: "Small amounts of urine leakage (that is drops)?",
+                        scaleId: 1,
+                    },
+                    {
+                        text: "Difficulty emptying your bladder?",
+                        scaleId: 1,
+                    },
+                    {
+                        text: "Pain or discomfort in the lower abdominal or genital area?",
+                        scaleId: 1,
+                    },
                 ],
                 options: [
                     ["Not at all", 0],
@@ -254,7 +274,12 @@ const en = {
             {
                 title: "FIQL",
                 subtitle: "Fecal Incontinence Quality of Life Scale",
-                prompts: ["In general, would you say your health is:"],
+                prompts: [
+                    {
+                        text: "In general, would you say your health is:",
+                        scaleId: 3,
+                    },
+                ],
                 options: [
                     ["Excellent", 5],
                     ["Very good", 4],
@@ -271,19 +296,49 @@ const en = {
                     "Due to accidental bowel leakage:",
                 ],
                 prompts: [
-                    "I am afraid to go out",
-                    "I avoid visiting friends",
-                    "I avoid staying overnight away from home",
-                    "It is difficult for me to get out and do things like going to a movie or to church",
-                    "I cut down on how much I eat before I go out",
-                    "Whenever I am away from home, I try to stay near a restroom as much as possible",
-                    "It is important to plan my schedule (daily activities) around my bowel pattern",
-                    "I avoid traveling",
-                    "I worry about not being able to get to the toilet in time",
-                    "I feel I have no control over my bowels",
-                    " I can't hold my bowel movement long enough to get to the bathroom",
-                    "I leak stool without even knowing it",
-                    "I try to prevent bowel accidents by staying very near a bathroom",
+                    { text: "I am afraid to go out", scaleId: 1 }, // a
+                    { text: "I avoid visiting friends", scaleId: 1 }, // b
+                    {
+                        text: "I avoid staying overnight away from home", // c
+                        scaleId: 1,
+                    },
+                    {
+                        text: "It is difficult for me to get out and do things like going to a movie or to church", // d
+                        scaleId: 1,
+                    },
+                    {
+                        text: "I cut down on how much I eat before I go out", // e
+                        scaleId: 1,
+                    },
+                    {
+                        text: "Whenever I am away from home, I try to stay near a restroom as much as possible", // f
+                        scaleId: 2,
+                    },
+                    {
+                        text: "It is important to plan my schedule (daily activities) around my bowel pattern", // g
+                        scaleId: 1,
+                    },
+                    { text: "I avoid traveling", scaleId: 1 }, // h
+                    {
+                        text: "I worry about not being able to get to the toilet in time", // i
+                        scaleId: 2,
+                    },
+                    {
+                        text: "I feel I have no control over my bowels", // j
+                        scaleId: 2,
+                    },
+                    {
+                        text: "I can't hold my bowel movement long enough to get to the bathroom", // k
+                        scaleId: 2,
+                    },
+                    {
+                        text: "I leak stool without even knowing it",
+                        scaleId: 4, // l
+                    },
+                    {
+                        text: "I try to prevent bowel accidents by staying very near a bathroom",
+                        scaleId: 2, // m
+                    },
                 ],
                 options: [
                     ["Most of the time", 1],
@@ -301,20 +356,39 @@ const en = {
                     "Due to accidental bowel leakage:",
                 ],
                 prompts: [
-                    "I feel ashamed",
-                    "I can not do many of things I want to do",
-                    "I worry about bowel accidents",
-                    "I feel depressed",
-                    "I worry about others smelling stool on me",
-                    "I feel like I am not a healthy person",
-                    "I enjoy life less",
-                    "I have sex less often than I would like to",
-                    "I feel different from other people",
-                    "The possibility of bowel accidents is always on my mind",
-                    "I am afraid to have sex",
-                    "I avoid traveling by plane or train",
-                    "I avoid going out to eat",
-                    "Whenever I go someplace new, I specifically locate where the bathrooms are",
+                    { text: "I feel ashamed", scaleId: 1 }, // a
+                    {
+                        text: "I can not do many of things I want to do",
+                        scaleId: 4,
+                    }, // b
+
+                    { text: "I worry about bowel accidents", scaleId: 2 }, // c
+                    { text: "I feel depressed", scaleId: 3 }, // d
+                    {
+                        text: "I worry about others smelling stool on me",
+                        scaleId: 4,
+                    }, // e
+                    {
+                        text: "I feel like I am not a healthy person",
+                        scaleId: 3,
+                    }, // f
+                    { text: "I enjoy life less", scaleId: 3 }, // g
+                    {
+                        text: "I have sex less often than I would like to",
+                        scaleId: 2,
+                    }, // h
+                    { text: "I feel different from other people", scaleId: 3 }, // i
+                    {
+                        text: "The possibility of bowel accidents is always on my mind",
+                        scaleId: 3,
+                    }, // j
+                    { text: "I am afraid to have sex", scaleId: 3 }, // k
+                    { text: "I avoid traveling by plane or train", scaleId: 1 }, // l
+                    { text: "I avoid going out to eat", scaleId: 1 }, // m
+                    {
+                        text: "Whenever I go someplace new, I specifically locate where the bathrooms are",
+                        scaleId: 3,
+                    }, // n
                 ],
                 options: [
                     ["Strongly Agree", 1],
@@ -329,7 +403,10 @@ const en = {
                 subtitle: "Fecal Incontinence Quality of Life Scale",
                 instructions: [""],
                 prompts: [
-                    "During the past month, have you felt so sad, discouraged, hopeless, or had so many problems that you wondered if anything was worthwhile?",
+                    {
+                        text: "During the past month, have you felt so sad, discouraged, hopeless, or had so many problems that you wondered if anything was worthwhile?",
+                        scaleId: 3,
+                    },
                 ],
                 options: [
                     ["Extremely So - I've almost given up", 1],
@@ -376,12 +453,7 @@ const en = {
             "Answer these by circling the appropriate number. While answering these questions, please consider your symptoms over the last 3 months.",
             "The PFDI-20 has 20 items and 3 scales of your symptoms. All items use the following format with a response scale from 0 to 4. ",
         ],
-        questionSets: [
-            {
-                prompts: [""],
-                options: [["", 5]],
-            },
-        ],
+        questionSets: [],
         interpretation: {
             title: "Interpretation",
             content: [

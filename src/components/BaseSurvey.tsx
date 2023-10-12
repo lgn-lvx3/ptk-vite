@@ -19,8 +19,8 @@ export const QuestionSetInstructions: React.FC<Props> = ({ questionSet }) => {
 
     return (
         <div className="mb-10 w-full">
-            <h4 className="text-base-300 text-right">{questionSet.title}</h4>
-            <h4 className="text-base-300 uppercase text-sm text-right">
+            <h4 className="text-gray-400 text-right">{questionSet.title}</h4>
+            <h4 className="text-gray-400 uppercase text-sm text-right">
                 {questionSet.subtitle}
             </h4>
 
@@ -52,7 +52,7 @@ export const SurveyQuestionCard: React.FC<SurveyQuestionCard> = ({
         <Card compact key={question.id} className="lg:card-normal my-5">
             <Card.Body className="flex flex-1 flex-col md:flex-row gap-5 justify-start items-center">
                 <div className="flex flex-1 prose font-semibold self-start">
-                    <h4>{question.prompt}</h4>
+                    <h4>{question.prompt.text}</h4>
                 </div>
                 <div className="flex flex-1 flex-col">
                     {/* Buttons/Options */}
@@ -119,7 +119,7 @@ export const BaseSurvey: React.FC = () => {
                     <Card.Title className="uppercase">
                         <h1 className="">{survey.title}</h1>
                     </Card.Title>
-                    <Card.Title className="uppercase text-sm text-base-300">
+                    <Card.Title className="uppercase text-sm text-gray-400">
                         {survey.subtitle}
                     </Card.Title>
                     {/* survey instructions */}
@@ -184,6 +184,7 @@ export const BaseSurvey: React.FC = () => {
                     </div>
                 </Card.Body>
             </Card>
+            {/* Uncomment to see PDF on main screen */}
             {/* <div className="h-screen">
                 <PDFViewer className="h-screen w-full">
                     <PDFSurvey />
