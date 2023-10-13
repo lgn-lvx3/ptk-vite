@@ -32,7 +32,7 @@ export const POPDI6_SURVEY_CONFIG: ISurveyData = {
                     scaleId: "POPDI6",
                 },
                 {
-                    text: "Ever have to push on the vagina or around the rectum to have or complete a bowel movement?",
+                    text: "Ever have to push on the genitals or around the rectum to have or complete a bowel movement?",
                     scaleId: "POPDI6",
                 },
                 {
@@ -40,7 +40,7 @@ export const POPDI6_SURVEY_CONFIG: ISurveyData = {
                     scaleId: "POPDI6",
                 },
                 {
-                    text: "Ever had to push on a bulge in the vaginal or perineum area with your fingers to start or complete urination?",
+                    text: "Ever had to push on a bulge in the genitals or perineum area with your fingers to start or complete urination?",
                     scaleId: "POPDI6",
                 },
             ],
