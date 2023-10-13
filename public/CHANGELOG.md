@@ -1,3 +1,9 @@
+#### 0.2.2 (2023-10-13)
+
+##### New Features
+
+* **ui:**  Added changelog modal on footer (a57044c4)
+
 #### 0.2.1 (2023-10-13)
 
 ##### Build System / Dependencies
