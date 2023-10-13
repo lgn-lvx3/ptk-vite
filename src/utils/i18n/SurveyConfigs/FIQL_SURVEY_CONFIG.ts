@@ -177,7 +177,7 @@ export const FIQL_SURVEY_CONFIG: ISurveyData = {
                 ["Quite a Bit", 3],
                 ["Some - Enough to bother me", 4],
                 ["A Little Bit", 5],
-                ["Not at All", 0],
+                ["Not at All", 6],
             ],
         },
     ],

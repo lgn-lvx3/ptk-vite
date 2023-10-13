@@ -1,9 +1,13 @@
 import { BaseOption } from "state/ISurvey/BaseOption"
 import { IQuestionSet } from "state/ISurvey/ISurvey"
-import { generateAnsweredQuestions } from "utils/TestHelpers"
+import {
+    generateAnsweredQuestions,
+    generateHighestSelectedQuestion,
+} from "utils/TestHelpers"
 import { translate } from "utils/i18n"
 import { FIQLSurvey } from "./FIQLSurvey"
 import { QuestionSetTranslated } from "state/ISurvey/QuestionSetTranslated"
+import { BaseQuestion } from "state/ISurvey/BaseQuestion"
 
 describe("FIQLSurvey", () => {
     let survey: FIQLSurvey
@@ -98,10 +102,19 @@ describe("FIQLSurvey", () => {
     })
 
     describe("calculateScaleScores", () => {
+        let firstOptions: BaseOption[]
+        let secondOptions: BaseOption[]
+        let thirdOptions: BaseOption[]
+        let lastOpt: BaseOption[]
+
+        let firstQuestionSet: QuestionSetTranslated
+        let secondQuestionSet: QuestionSetTranslated
+        let thirdQuestionSet: QuestionSetTranslated
+        let lastQuest: QuestionSetTranslated
         beforeEach(() => {
             survey = new FIQLSurvey()
             // generate first questionSet
-            const firstOptions = [
+            firstOptions = [
                 new BaseOption(["1", 5]),
                 new BaseOption(["2", 4]),
                 new BaseOption(["3", 3]),
@@ -109,7 +122,7 @@ describe("FIQLSurvey", () => {
                 new BaseOption(["5", 1]),
             ]
 
-            const firstQuestionSet = translate(
+            firstQuestionSet = translate(
                 "FIQL.questionSets.0",
             ) as unknown as QuestionSetTranslated
 
@@ -122,31 +135,31 @@ describe("FIQLSurvey", () => {
             survey.selected.push(...firstAnswers)
 
             // generate second questionSet
-            const secondOptions = [
+            secondOptions = [
                 new BaseOption(["1", 1]),
                 new BaseOption(["2", 2]),
                 new BaseOption(["3", 3]),
                 new BaseOption(["4", 4]),
                 new BaseOption(["0", 0]),
             ]
-            const seconQuestionSet = translate(
+            secondQuestionSet = translate(
                 "FIQL.questionSets.1",
             ) as unknown as QuestionSetTranslated
             const secondAnswers = generateAnsweredQuestions(
-                seconQuestionSet,
+                secondQuestionSet,
                 secondOptions,
             )
             survey.selected.push(...secondAnswers)
 
             // generate third questionSet
-            const thirdOptions = [
+            thirdOptions = [
                 new BaseOption(["1", 1]),
                 new BaseOption(["2", 2]),
                 new BaseOption(["3", 3]),
                 new BaseOption(["4", 4]),
                 new BaseOption(["0", 0]),
             ]
-            const thirdQuestionSet = translate(
+            thirdQuestionSet = translate(
                 "FIQL.questionSets.2",
             ) as unknown as QuestionSetTranslated
             const thirdAnswers = generateAnsweredQuestions(
@@ -156,15 +169,15 @@ describe("FIQLSurvey", () => {
             survey.selected.push(...thirdAnswers)
 
             // generate third questionSet
-            const lastOpt = [
+            lastOpt = [
                 new BaseOption(["1", 1]),
                 new BaseOption(["2", 2]),
                 new BaseOption(["3", 3]),
                 new BaseOption(["4", 4]),
                 new BaseOption(["5", 5]),
-                new BaseOption(["6", 0]),
+                new BaseOption(["6", 6]),
             ]
-            const lastQuest = translate(
+            lastQuest = translate(
                 "FIQL.questionSets.3",
             ) as unknown as QuestionSetTranslated
             const lastAns = generateAnsweredQuestions(lastQuest, lastOpt)
@@ -181,8 +194,8 @@ describe("FIQLSurvey", () => {
             survey.calculateMaxScaleScores()
             expect(survey.scales[1].maxScore).toBe(maxScore)
         })
-        it("should have a max score of 30 for scale 3", () => {
-            const maxScore = 30
+        it("should have a max score of 31 for scale 3", () => {
+            const maxScore = 31
             survey.calculateMaxScaleScores()
             expect(survey.scales[2].maxScore).toBe(maxScore)
         })
@@ -190,6 +203,41 @@ describe("FIQLSurvey", () => {
             const maxScore = 12
             survey.calculateMaxScaleScores()
             expect(survey.scales[3].maxScore).toBe(maxScore)
+        })
+
+        it("should have 100/100 if the highest value is selected for each scale", () => {
+            // for each questionlist, find the option that is the highest value
+
+            survey.selected = []
+
+            const options = [firstOptions, secondOptions, thirdOptions, lastOpt]
+
+            const questions = [
+                firstQuestionSet,
+                secondQuestionSet,
+                thirdQuestionSet,
+                lastQuest,
+            ]
+
+            questions.forEach((question, index) => {
+                const val = generateHighestSelectedQuestion(
+                    questions[index],
+                    options[index],
+                )
+                survey.selected = [...survey.selected, ...val]
+            })
+
+            // survey.calculateScore()
+            console.log("length", survey.getTotalQuestionLength())
+            console.log("length", survey.selected.length)
+            survey.calculateScore()
+            expect(survey.scales[0].percentageScore).toBe(100)
+            expect(survey.scales[1].percentageScore).toBe(100)
+            expect(survey.scales[2].percentageScore).toBe(100)
+            expect(survey.scales[3].percentageScore).toBe(100)
+
+            // console.log(survey.selected.length)
+            // survey.calculateScore()
         })
     })
 })

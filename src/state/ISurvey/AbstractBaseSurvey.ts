@@ -11,6 +11,7 @@ import { IScale } from "./IScale"
 import { BaseQuestionSet } from "./BaseQuestionSet"
 import { BaseOption } from "./BaseOption"
 import { QuestionSetTranslated } from "./QuestionSetTranslated"
+import { BaseQuestion } from "./BaseQuestion"
 
 export abstract class AbstractBaseSurvey implements ISurvey {
     id: string
@@ -23,7 +24,7 @@ export abstract class AbstractBaseSurvey implements ISurvey {
 
     scales: IScale[] = []
 
-    selected: IQuestion[] = []
+    selected: BaseQuestion[] = []
     completed = false
 
     constructor(transationSurveyKey: string) {
