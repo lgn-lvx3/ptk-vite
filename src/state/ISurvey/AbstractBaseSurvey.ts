@@ -74,9 +74,15 @@ export abstract class AbstractBaseSurvey implements ISurvey {
                 `${transationSurveyKey}.references` as TxKeyPath,
             ) as unknown as ISurveySection,
         }
+
+        this.scales = translate(
+            `${transationSurveyKey}.scales` as TxKeyPath,
+        ) as unknown as IScale[]
     }
 
-    abstract calculateScore(): void
+    calculateScore(): void {
+        this.calculateScaleScores()
+    }
 
     selectOption(question: IQuestion, option: IOption): void {
         // if exists in selected, replace
@@ -119,6 +125,9 @@ export abstract class AbstractBaseSurvey implements ISurvey {
     }
 
     calculateScaleScores(): void {
+        if (this.selected.length !== this.getTotalQuestionLength()) {
+            throw new Error("Please answer all questions")
+        }
         this.calculateMaxScaleScores()
         // for each scale, calculate the score
         this.scales.forEach((scale) => {
@@ -135,9 +144,9 @@ export abstract class AbstractBaseSurvey implements ISurvey {
             const questions = this.selected.filter(
                 (q) => q.prompt.scaleId === scale.id,
             )
-            console.log("questions", questions)
+            // console.log("questions", questions)
 
-            console.log("score", score)
+            // console.log("score", score)
 
             // set the score
             scale.score = score
@@ -149,5 +158,6 @@ export abstract class AbstractBaseSurvey implements ISurvey {
                 (scale.score / scale.maxScore) * 100,
             )
         })
+        this.completed = true
     }
 }

@@ -4,7 +4,10 @@
 
 import { BaseOption } from "state/ISurvey/BaseOption"
 import { BaseQuestion } from "state/ISurvey/BaseQuestion"
+import { BaseQuestionSet } from "state/ISurvey/BaseQuestionSet"
 import { IScale } from "state/ISurvey/IScale"
+import { IQuestionSet } from "state/ISurvey/ISurvey"
+import { QuestionSetTranslated } from "state/ISurvey/QuestionSetTranslated"
 
 /**
  * Generates an array of BaseQuestion objects with the specified number of questions and options.
@@ -32,5 +35,23 @@ export const generateBaseQuestions = (
             ),
         )
     }
+    return selected
+}
+
+export const generateAnsweredQuestions = (
+    questionSet: QuestionSetTranslated,
+    options: BaseOption[],
+) => {
+    const selected: BaseQuestion[] = []
+    // generate options
+
+    questionSet.prompts.forEach((prompt) => {
+        const selectedOption =
+            options[Math.floor(Math.random() * options.length)]
+        const selectedQuestion = new BaseQuestion(prompt, options)
+        selectedQuestion.selectedAnswer = selectedOption
+        selected.push(selectedQuestion)
+    })
+
     return selected
 }

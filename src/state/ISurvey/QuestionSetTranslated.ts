@@ -1,9 +1,9 @@
-import { Prompt } from "./ISurvey"
+import { IPrompt } from "./ISurvey"
 
 export type QuestionSetTranslated = {
     title?: string
     subtitle?: string
     instructions: string[]
-    prompts: Prompt[]
+    prompts: IPrompt[]
     options: [[string, number]]
 }

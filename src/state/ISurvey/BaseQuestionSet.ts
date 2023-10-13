@@ -1,5 +1,5 @@
 import { getUniqueNumber } from "utils"
-import { IQuestionSet, Prompt } from "./ISurvey"
+import { IQuestionSet, IPrompt } from "./ISurvey"
 import { BaseQuestion } from "./BaseQuestion"
 import { BaseOption } from "./BaseOption"
 
@@ -9,13 +9,13 @@ export class BaseQuestionSet implements IQuestionSet {
     subtitle?: string | undefined
     instructions?: string[] | undefined
 
-    private questionPrompts: Prompt[]
+    private questionPrompts: IPrompt[]
 
     questions: BaseQuestion[]
     answers = []
 
     constructor(
-        questionPrompts: Prompt[],
+        questionPrompts: IPrompt[],
         options: BaseOption[],
         instructions?: string[],
         title?: string,

@@ -10,7 +10,7 @@ export default defineConfig({
         globals: true,
         environment: "happy-dom",
         setupFiles: ".vitest/setup",
-        include: ["**/*.test.{ts,tsx}", "**/*test.{ts,tsx}"],
+        include: ["**/**/*.test.{ts,tsx}", "**/*test.{ts,tsx}"],
     },
     define: {
         APP_VERSION: JSON.stringify(process.env.npm_package_version),

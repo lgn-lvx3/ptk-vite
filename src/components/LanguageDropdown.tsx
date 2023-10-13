@@ -22,7 +22,7 @@ export const LanguageDropdown: React.FC = () => {
     const supportedLanguages = store.preferences.supportedLanguages()
     // const navigate = useNavigate()
     useEffect(() => {
-        console.log(`Setting language to: ${language}`)
+        // console.log(`Setting language to: ${language}`)
         i18n.locale = language
     }, [language])
     return (

@@ -19,9 +19,6 @@ import { AbstractBaseSurvey } from "../../ISurvey/AbstractBaseSurvey"
  * @extends {AbstractBaseSurvey}
  */
 export class UDI6Survey extends AbstractBaseSurvey {
-    // base max score of 100
-    maxScore = 100
-
     /**
      * Creates an instance of UDI6Survey. All surveys are set up to read from the translate configuration files, which
      * @author Logan Hendershot
@@ -30,22 +27,5 @@ export class UDI6Survey extends AbstractBaseSurvey {
      */
     constructor() {
         super("UDI6")
-
-        // set up scales
-        this.scales = [
-            {
-                id: 1,
-                name: "Score",
-            },
-        ]
-    }
-
-    calculateScore(): void {
-        if (this.selected.length !== this.getTotalQuestionLength()) {
-            throw new Error("Please answer all questions")
-        }
-
-        this.calculateScaleScores()
-        this.completed = true
     }
 }

@@ -1,15 +1,17 @@
+import { IScale } from "./IScale"
+
 type Option = [string, number]
 
 interface Prompt {
     text: string
-    scaleId?: number
+    scaleId?: string
 }
 
 interface QuestionSet {
     title: string
     subtitle: string
     instructions?: string[]
-    prompts: (string | Prompt)[]
+    prompts: Prompt[]
     options: Option[]
 }
 
@@ -18,10 +20,11 @@ interface SectionInfo {
     content: string[]
 }
 
-interface FormData {
+export interface ISurveyData {
     title: string
     subtitle: string
     instructions: string[]
+    scales: IScale[]
     questionSets: QuestionSet[]
     interpretation?: SectionInfo
     scoring?: SectionInfo
@@ -60,5 +63,5 @@ export interface SurveyTranslationType {
     navigation: Navigation
     disclaimer: Disclaimer
     errors: Errors
-    [key: string]: Hero | Navigation | Disclaimer | Errors | FormData
+    [key: string]: Hero | Navigation | Disclaimer | Errors | ISurveyData
 }

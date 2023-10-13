@@ -1,6 +1,6 @@
 export interface IScale {
     /** The unique identifier of the scale. */
-    id: number
+    id: string
     /** The name of the scale. */
     name?: string
 

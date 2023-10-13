@@ -121,7 +121,7 @@ export interface IQuestion {
     /** The unique identifier of the question. */
     id: number
     /** The text and scaleID of the question. */
-    prompt: Prompt
+    prompt: IPrompt
 
     /** The selected option of the question, if any. */
     selectedAnswer: IOption | undefined
@@ -129,7 +129,7 @@ export interface IQuestion {
     options: IOption[]
 }
 
-export type Prompt = {
+export interface IPrompt {
     text: string
-    scaleId: number
+    scaleId: string
 }
