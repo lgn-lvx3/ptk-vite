@@ -1,7 +1,7 @@
 {
     "name": "ptk",
     "description": "Pelvic Toolkit Calculators Web App",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "private": true,
     "author": {
         "name": "Logan Hendershot",
@@ -13,7 +13,8 @@
         "serve": "vite preview",
         "test": "vitest",
         "test:ui": "vitest --ui",
-        "typecheck": "tsc --project tsconfig.json --noEmit"
+        "typecheck": "tsc --project tsconfig.json --noEmit",
+        "roll": "changelog -p -f 'public/CHANGELOG.md' && git add 'public/CHANGELOG.md' && git commit -m 'updated CHANGELOG.md' && yarn version --patch && git push --follow-tags"
     },
     "dependencies": {
         "@formkit/auto-animate": "0.8.0",
@@ -22,6 +23,7 @@
         "@udecode/zustood": "2.0.0",
         "i18n-js": "4.3.2",
         "localforage": "1.10.0",
+        "marked": "9.1.2",
         "match-sorter": "6.3.1",
         "notistack": "3.0.1",
         "react": "18.2.0",
