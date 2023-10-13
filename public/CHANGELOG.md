@@ -1,3 +1,59 @@
+#### 0.2.1 (2023-10-13)
+
+##### Build System / Dependencies
+
+* **deploy:**  re adding removed action file (80b625ad)
+
+##### Documentation Changes
+
+* **readme:**  Updated readme to reflect used frameworks (6da1f749)
+
+##### New Features
+
+* **test:**
+  *  updated FIQL to test for setting max score (835a8fa0)
+  *  Added test helpers and UDI6 unit tests (4f712724)
+* **surveys:**
+  *  added scale scoring to all surveys, added types, impl of UDI6 and FIQL scale scores via testing. (9309147e)
+  *  all surveys built w/ working UI (ca8f4c05)
+  *  impl of PFDI, PFIQ, UDI6, IIQ, CRAD, POPDI (0ce35ca5)
+* **survey:**
+  *  impl of scale scores for base survey, UDI6 and FIQL tested. (50d59ef0)
+  *  Updated UDI6 calc to make sense and updated testing (6a8f2b7a)
+  *  Added CCFIS and VFI surveys (cb3efbe3)
+* **ui:**
+  *  added full layout of themes (383d19dd)
+  *  added theme switcher component (c0b30264)
+  *  added PH footer (453a135f)
+  *  added home/surveys pages, added logo to pdf (8d30ac03)
+  *  integration with react-router-dom (2e5f1036)
+  *  added error handling / snackbar to share (708f5592)
+  *  working udi6 calc (92d02493)
+* **i18n:**  impl of translations for UDI6 to en/es. refactor(survey): Refactor of BaseSurvey & PDFSurvey to reflect multi questionlist surveys. (880ce34a)
+* **pdf:**
+  *  impl of pdf download/share (cd15ae39)
+  *  valid pdf rendering of survey (8b7f91d6)
+
+##### Bug Fixes
+
+* **data:**  updated POPDI change from vagina to genitals (e8d97eeb)
+* **footer:**  impl of responsive ui (a1fdef86)
+* **nav:**  added staticwebapp config for URL routing fallback (cda0f94f)
+* **ui:**
+  *  Updated site title (ac79f6df)
+  *  fixed broken logo images (216f7f17)
+  *  optimized routing, removing unecessary pages. Added useEffects to handle translation changes on the fly. (4be6c6d7)
+  *  language dropdown fix (07188f2f)
+  *  updated header to allow a lot of surveys (454c64bb)
+  *  removed icons on small screens (c8450512)
+  *  added app.css (a4dd6169)
+
+##### Other Changes
+
+* **ui:**  added spanish translations of survey content (0bab1c7a)
+* //github.com/lgn-lvx3/ptk-vite (8368fefe)
+*  @Azure opensource@microsoft.com (bbff0212)
+
 #### 1.0.4 (2022-04-13)
 
 #### 1.0.3 (2022-04-13)
