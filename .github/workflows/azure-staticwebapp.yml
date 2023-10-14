@@ -61,7 +61,7 @@ jobs:
           status: ${{ job.status }}
           fields: repo,message,commit,author,action,eventName,ref,workflow,job,took # Customize this to your needs
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }} # Use the secret you created earlier
+          SLACK_WEBHOOK_URL: ${{ secrets.PTK_BUILD_WEBHOOK }} # Use the secret you created earlier
 
   close_pull_request_job:
     permissions:
