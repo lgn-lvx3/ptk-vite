@@ -21,6 +21,7 @@ on:
 
 # Environment variables available to all jobs and steps in this workflow
 env:
+  PTK_BUILD_WEBHOOK: ${{ secrets.PTK_BUILD_WEBHOOK }} # Use the secret you created earlier
   APP_LOCATION: "/" # location of your client code
   API_LOCATION: "api" # location of your api source code - optional
   APP_ARTIFACT_LOCATION: "dist" # location of client code build output
@@ -59,9 +60,9 @@ jobs:
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
-          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took # Customize this to your needs
+          fields: repo,message,author,action # Customize this to your needs
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.PTK_BUILD_WEBHOOK }} # Use the secret you created earlier
+          SLACK_WEBHOOK_URL: ${{ env.PTK_BUILD_WEBHOOK }} # Use the secret you created earlier
 
   close_pull_request_job:
     permissions:
