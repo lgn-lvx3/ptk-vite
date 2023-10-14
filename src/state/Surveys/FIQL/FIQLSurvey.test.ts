@@ -228,8 +228,8 @@ describe("FIQLSurvey", () => {
             })
 
             // survey.calculateScore()
-            console.log("length", survey.getTotalQuestionLength())
-            console.log("length", survey.selected.length)
+            // console.log("length", survey.getTotalQuestionLength())
+            // console.log("length", survey.selected.length)
             survey.calculateScore()
             expect(survey.scales[0].percentageScore).toBe(100)
             expect(survey.scales[1].percentageScore).toBe(100)

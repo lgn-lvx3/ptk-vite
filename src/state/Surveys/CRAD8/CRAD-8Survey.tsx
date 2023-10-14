@@ -1,4 +1,4 @@
-import { AbstractBaseSurvey } from "../ISurvey/AbstractBaseSurvey"
+import { AbstractBaseSurvey } from "../../ISurvey/AbstractBaseSurvey"
 
 /**
  * @description Impl of the AbstractBaseSurvey for the CRAD8 survey.

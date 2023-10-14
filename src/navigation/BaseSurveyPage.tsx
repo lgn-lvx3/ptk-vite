@@ -11,7 +11,7 @@ import { CCFISSurvey } from "state/Surveys/CCFISSurvey"
 import { PFIQ7Survey } from "state/Surveys/PFIQ-7Survey"
 import { BaseSurvey } from "components/BaseSurvey"
 import { SurveyNavTitles } from "state/AppStore"
-import { CRAD8Survey } from "state/Surveys/CRAD-8Survey"
+import { CRAD8Survey } from "state/Surveys/CRAD8/CRAD-8Survey"
 
 interface Props {
     name: SurveyNavTitles

@@ -67,7 +67,7 @@ export const generateHighestSelectedQuestion = (
         const highestValueOption = options.reduce((prev, current) => {
             return prev.optionTuple[1] > current.optionTuple[1] ? prev : current
         })
-        console.log(highestValueOption)
+        // console.log(highestValueOption)
         const selectedQuestion = new BaseQuestion(prompt, options)
         selectedQuestion.selectedAnswer = highestValueOption
         selected.push(selectedQuestion)
