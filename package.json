@@ -14,7 +14,7 @@
         "test": "vitest",
         "test:ui": "vitest --ui",
         "typecheck": "tsc --project tsconfig.json --noEmit",
-        "roll": "changelog -p -f 'public/CHANGELOG.md' && git add 'public/CHANGELOG.md' && git commit -m 'updated CHANGELOG.md' && yarn version --patch && git push --follow-tags"
+        "roll": "yarn build && changelog -p -f 'public/CHANGELOG.md' && git add 'public/CHANGELOG.md' && git commit -m 'updated CHANGELOG.md' && yarn version --patch && git push --follow-tags"
     },
     "dependencies": {
         "@formkit/auto-animate": "0.8.0",

@@ -101,7 +101,7 @@ describe("CRAD8Survey", () => {
 
             survey.calculateScore()
             survey.scales.forEach((scale) => {
-                console.log(scale)
+                // console.log(scale)
                 expect(scale.percentageScore).toBe(maxPercentageScore)
             })
         })
