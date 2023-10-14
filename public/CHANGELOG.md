@@ -1,3 +1,13 @@
+#### 0.2.3 (2023-10-14)
+
+##### Chores
+
+* **build:**  updated build changelog script (83af3b71)
+
+##### New Features
+
+* **test:**  Added crad8 unit test (57229e61)
+
 #### 0.2.2 (2023-10-13)
 
 ##### New Features
