@@ -1,3 +1,9 @@
+#### 0.2.5 (2023-10-14)
+
+##### Bug Fixes
+
+* **build:**  fixing slack webhook integration (e7c3453d)
+
 #### 0.2.4 (2023-10-14)
 
 #### 0.2.3 (2023-10-14)
