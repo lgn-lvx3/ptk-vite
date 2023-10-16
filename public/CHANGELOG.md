@@ -1,3 +1,9 @@
+#### 0.2.8 (2023-10-16)
+
+##### New Features
+
+* **testing:**  Added CCFISSurvey unit testing. (1fd64581)
+
 #### 0.2.7 (2023-10-14)
 
 #### 0.2.6 (2023-10-14)
