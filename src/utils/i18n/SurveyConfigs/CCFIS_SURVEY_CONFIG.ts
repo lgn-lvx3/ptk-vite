@@ -43,7 +43,7 @@ export const CCFIS_SURVEY_CONFIG: ISurveyData = {
     interpretation: {
         title: "Interpretation",
         content: [
-            "The scoring is from 0-24. The higher the score, the greater the impairment/disability or, totally incontinent.",
+            "The scoring is from 0-20. The higher the score, the greater the impairment/disability or, totally incontinent.",
         ],
     },
     scoring: {
@@ -63,7 +63,7 @@ export const CCFIS_SURVEY_CONFIG: ISurveyData = {
     references: {
         title: "References",
         content: [
-            "Jorge JM, Wexner SD. Etiology and management of fecal incontinence. Dis Colon Rectum. 1993 Jan;36(1):77–97.",
+            "Jorge JM, Wexner SD. Etiology and management of fecal incontinence. Dis Colon Rectum. 1993 Jan;36(1):77-97.",
         ],
     },
 }
