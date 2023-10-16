@@ -1,7 +1,7 @@
 {
     "name": "ptk",
     "description": "Pelvic Toolkit Calculators Web App",
-    "version": "0.2.7",
+    "version": "0.2.8",
     "private": true,
     "author": {
         "name": "Logan Hendershot",
