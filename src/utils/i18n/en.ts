@@ -8,6 +8,7 @@ import {
     PFDI20_SURVEY_CONFIG,
     VFIS_SURVEY_CONFIG,
     CCFIS_SURVEY_CONFIG,
+    PFIQ7_SURVEY_CONFIG,
 } from "./SurveyConfigs"
 
 const en: SurveyTranslationType = {
@@ -41,7 +42,7 @@ const en: SurveyTranslationType = {
     PFDI20: PFDI20_SURVEY_CONFIG,
     VFIS: VFIS_SURVEY_CONFIG,
     CCFIS: CCFIS_SURVEY_CONFIG,
-    PFIQ7: PFDI20_SURVEY_CONFIG,
+    PFIQ7: PFIQ7_SURVEY_CONFIG,
 }
 export default en
 export type Translations = typeof en

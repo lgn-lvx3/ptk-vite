@@ -156,7 +156,9 @@ export const PFIQ7_SURVEY_CONFIG: ISurveyData = {
             "PFIQ-7 Score Scales: Urinary Impact Questionnaire (UIQ-7): 7 items under column heading “Bladder or urine",
             "Colorectal-Anal Impact questionnaire (CRAIQ-7): 7 items under column heading “Bowel / rectum",
             "Pelvic Organ Prolapse Impact Questionnaire (POPIQ-7): Items under column “Pelvis / Vagina",
-            "Scale Scores: Obtain the mean value for all of the answered items within the corresponding scale (possible value 0 - 3) and then multiply by (100/3) to obtain the scale score (range 0-100). Missing items are dealt with by using the mean from answered items only. PFIQ-7 Summary Score: Add the scores from the 3 scales together to obtain the summary score (range 0-300).",
+            "Scale Scores: Obtain the mean value for all of the answered items within the corresponding scale (possible value 0 - 3) and then multiply by (100/3) to obtain the scale score (range 0-100).",
+            "Missing items are dealt with by using the mean from answered items only.",
+            "PFIQ-7 Summary Score: Add the scores from the 3 scales together to obtain the summary score (range 0-300).",
         ],
     },
     mcid: {
