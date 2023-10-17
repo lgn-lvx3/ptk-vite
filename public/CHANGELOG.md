@@ -1,3 +1,9 @@
+#### 0.2.9 (2023-10-17)
+
+##### New Features
+
+* **test:**  impl of IIQ,PFIQ,POPDI,VFIS unit testing (ed9a87a8)
+
 #### 0.2.8 (2023-10-16)
 
 ##### New Features
