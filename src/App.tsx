@@ -1,6 +1,5 @@
 import { SnackbarProvider } from "notistack"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
-
 import { useTheme } from "react-daisyui"
 import { store } from "state/Store"
 import { ErrorPage } from "navigation/ErrorPage"
