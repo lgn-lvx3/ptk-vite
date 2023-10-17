@@ -1,4 +1,12 @@
 import { ISurveyData } from "state/ISurvey/SurveyTranslationType"
+import {
+    POPDI6_SURVEY_CONFIG,
+    CRAD8_SURVEY_CONFIG,
+    UDI6_SURVEY_CONFIG,
+} from "../../../utils/i18n/SurveyConfigs"
+const popdiQ = POPDI6_SURVEY_CONFIG.questionSets
+const cradQ = CRAD8_SURVEY_CONFIG.questionSets
+const udiQ = UDI6_SURVEY_CONFIG.questionSets
 
 export const PFDI20_SURVEY_CONFIG: ISurveyData = {
     title: "PFDI-20",
@@ -23,7 +31,7 @@ export const PFDI20_SURVEY_CONFIG: ISurveyData = {
             name: "UDI6 Score",
         },
     ],
-    questionSets: [],
+    questionSets: [popdiQ[0], cradQ[0], udiQ[0]],
     interpretation: {
         title: "Interpretation",
         content: [
