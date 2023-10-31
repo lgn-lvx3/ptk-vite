@@ -8,8 +8,8 @@ interface Prompt {
 }
 
 interface QuestionSet {
-    title: string
-    subtitle: string
+    title?: string
+    subtitle?: string
     instructions?: string[]
     prompts: Prompt[]
     options: Option[]

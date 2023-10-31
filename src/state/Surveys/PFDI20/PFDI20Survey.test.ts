@@ -56,8 +56,6 @@ describe("PFDI20Survey", () => {
 
     describe("calculateScaleScores", () => {
         let firstOptions: BaseOption[]
-        let secondOptions: BaseOption[]
-        let thirdOptions: BaseOption[]
 
         let firstQuestionSet: QuestionSetTranslated
         let secondQuestionSet: QuestionSetTranslated
@@ -66,11 +64,11 @@ describe("PFDI20Survey", () => {
             survey = new PFDI20Survey()
             // generate first questionSet
             firstOptions = [
-                new BaseOption(["1", 5]),
-                new BaseOption(["2", 4]),
+                new BaseOption(["0", 0]),
+                new BaseOption(["1", 1]),
+                new BaseOption(["2", 2]),
                 new BaseOption(["3", 3]),
-                new BaseOption(["4", 2]),
-                new BaseOption(["5", 1]),
+                new BaseOption(["4", 4]),
             ]
 
             firstQuestionSet = translate(
@@ -86,52 +84,41 @@ describe("PFDI20Survey", () => {
             survey.selected.push(...firstAnswers)
 
             // generate second questionSet
-            secondOptions = [
-                new BaseOption(["1", 1]),
-                new BaseOption(["2", 2]),
-                new BaseOption(["3", 3]),
-                new BaseOption(["4", 4]),
-                new BaseOption(["0", 0]),
-            ]
             secondQuestionSet = translate(
                 "PFDI20.questionSets.1",
             ) as unknown as QuestionSetTranslated
             const secondAnswers = generateAnsweredQuestions(
                 secondQuestionSet,
-                secondOptions,
+                firstOptions,
             )
             survey.selected.push(...secondAnswers)
 
-            // generate third questionSet
-            thirdOptions = [
-                new BaseOption(["1", 1]),
-                new BaseOption(["2", 2]),
-                new BaseOption(["3", 3]),
-                new BaseOption(["4", 4]),
-                new BaseOption(["0", 0]),
-            ]
             thirdQuestionSet = translate(
                 "PFDI20.questionSets.2",
             ) as unknown as QuestionSetTranslated
             const thirdAnswers = generateAnsweredQuestions(
                 thirdQuestionSet,
-                thirdOptions,
+                firstOptions,
             )
-            survey.selected.push(...thirdAnswers)
+            survey.selected.push(
+                ...firstAnswers,
+                ...secondAnswers,
+                ...thirdAnswers,
+            )
         })
 
-        it("should have a max score of 100 for scale 1", () => {
-            const maxScore = 100
+        it("should have a max score of 24 for scale POPDI6 Scale", () => {
+            const maxScore = 24
             survey.calculateMaxScaleScores()
             expect(survey.scales[0].maxScore).toBe(maxScore)
         })
-        it("should have a max score of 100 for scale 2", () => {
-            const maxScore = 100
+        it("should have a max score of 32 for scale CRAD8", () => {
+            const maxScore = 32
             survey.calculateMaxScaleScores()
             expect(survey.scales[1].maxScore).toBe(maxScore)
         })
-        it("should have a max score of 100 for scale 3", () => {
-            const maxScore = 100
+        it("should have a max score of 24 for UDI6", () => {
+            const maxScore = 24
             survey.calculateMaxScaleScores()
             expect(survey.scales[2].maxScore).toBe(maxScore)
         })
@@ -141,7 +128,7 @@ describe("PFDI20Survey", () => {
 
             survey.selected = []
 
-            const options = [firstOptions, secondOptions, thirdOptions]
+            const options = [firstOptions, firstOptions, firstOptions]
 
             const questions = [
                 firstQuestionSet,
@@ -166,7 +153,7 @@ describe("PFDI20Survey", () => {
         it("should calculate correct score when random options are selected", () => {
             survey.selected = []
 
-            const options = [firstOptions, secondOptions, thirdOptions]
+            const options = [firstOptions, firstOptions, firstOptions]
 
             const questions = [
                 firstQuestionSet,

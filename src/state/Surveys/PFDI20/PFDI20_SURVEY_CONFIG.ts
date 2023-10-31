@@ -1,9 +1,7 @@
 import { ISurveyData } from "state/ISurvey/SurveyTranslationType"
-import {
-    POPDI6_SURVEY_CONFIG,
-    CRAD8_SURVEY_CONFIG,
-    UDI6_SURVEY_CONFIG,
-} from "../../../utils/i18n/SurveyConfigs"
+import { POPDI6_SURVEY_CONFIG } from "../POPDI6/POPDI6_SURVEY_CONFIG"
+import { CRAD8_SURVEY_CONFIG } from "../CRAD8/CRAD8_SURVEY_CONFIG"
+import { UDI6_SURVEY_CONFIG } from "../UDI6/UDI6_SURVEY_CONFIG"
 const popdiQ = POPDI6_SURVEY_CONFIG.questionSets
 const cradQ = CRAD8_SURVEY_CONFIG.questionSets
 const udiQ = UDI6_SURVEY_CONFIG.questionSets

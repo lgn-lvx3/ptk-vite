@@ -39,17 +39,14 @@ export const CRAD8_SURVEY_CONFIG: ISurveyData = {
                     text: "Usually lose gas from the rectum beyond your control?",
                     scaleId: "CRAD8",
                 },
-
                 {
                     text: "Usually have pain when you pass your stool?",
                     scaleId: "CRAD8",
                 },
-
                 {
                     text: "Experience a strong sense of urgency and have to rush to the bathroom to have a bowel movement?",
                     scaleId: "CRAD8",
                 },
-
                 {
                     text: "Does part of your bowel ever pass through the rectum and bulge outside during or after a bowel movement?",
                     scaleId: "CRAD8",

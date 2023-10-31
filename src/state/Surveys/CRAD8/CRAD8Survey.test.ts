@@ -10,7 +10,6 @@ describe("CRAD8Survey", () => {
     const scaleName = "CRAD8"
     const scaleLength = 8
     const maxTotalScore = 32
-    const scaleMaxVal = 4
     const optionScale = [0, 1, 2, 3, 4]
 
     beforeEach(() => {

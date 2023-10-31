@@ -4,7 +4,7 @@ import { generateBaseQuestions } from "utils/TestHelpers"
 import { IScale } from "state/ISurvey/IScale"
 
 const questionsTotal = 6
-const optionScale = [0, 1, 2, 3]
+const optionScale = [0, 1, 2, 3, 4]
 
 describe("UDI6Survey", () => {
     let survey: UDI6Survey
@@ -61,7 +61,7 @@ describe("UDI6Survey", () => {
         })
 
         it("should calculate the maxScore of each scale", () => {
-            const maxScaleScore = 18
+            const maxScaleScore = 24
 
             // generate 6 questions with 4 options each
             const baseQuestions = generateBaseQuestions(
@@ -92,7 +92,7 @@ describe("UDI6Survey", () => {
             )
 
             baseQuestions.forEach((question) => {
-                question.selectedAnswer = question.options[3]
+                question.selectedAnswer = question.options[4]
                 survey.selected.push(question)
             })
 
@@ -127,7 +127,7 @@ describe("UDI6Survey", () => {
 
             // calculate the average
             // round it to the nearest integer and multiply
-            const completedScore = Math.round((totalScore / 18) * 100)
+            const completedScore = Math.round((totalScore / 24) * 100)
             survey.calculateScore()
 
             expect(survey.scales[0].percentageScore).toBe(completedScore)

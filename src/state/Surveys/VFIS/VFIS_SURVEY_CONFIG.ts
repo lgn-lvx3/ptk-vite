@@ -23,11 +23,10 @@ export const VFIS_SURVEY_CONFIG: ISurveyData = {
                 "Daily - 1 or more episodes a day",
             ],
             prompts: [
-                { text: "Solid stool leakage", scaleId: "VFIS" },
-                { text: "Liquid stool leakage", scaleId: "VFIS" },
-                { text: "Gas leakage", scaleId: "VFIS" },
-                { text: "Pad use (for stool)", scaleId: "VFIS" },
-                { text: "Lifestyle restriction", scaleId: "VFIS" },
+                { text: "Incontinence for solid stool", scaleId: "VFIS" },
+                { text: "Incontinence for liquid stool", scaleId: "VFIS" },
+                { text: "Incontinence for gas", scaleId: "VFIS" },
+                { text: "Alteration in lifestyle ", scaleId: "VFIS" },
             ],
             options: [
                 ["Never", 0],
@@ -35,6 +34,48 @@ export const VFIS_SURVEY_CONFIG: ISurveyData = {
                 ["Sometimes", 2],
                 ["Weekly", 3],
                 ["Daily", 4],
+            ],
+        },
+        {
+            title: "VFIS",
+            subtitle: "Vaizey Fecal Incontinence Score",
+            instructions: [
+                "Please select one answer for each question to indicate how often you experience the following symptoms.",
+                "Never - no episodes in the past 4 weeks",
+                "Rarely - 1 episode in the past 4 weeks",
+                "Sometimes - 1 or more episodes in the past 4 weeks",
+                "Weekly - 1 or more episodes a week",
+                "Daily - 1 or more episodes a day",
+            ],
+            prompts: [
+                { text: "Need to wear a pad or plug", scaleId: "VFIS" },
+                { text: "Taking constipating medicines", scaleId: "VFIS" },
+            ],
+            options: [
+                ["No", 0],
+                ["Yes", 2],
+            ],
+        },
+        {
+            title: "VFIS",
+            subtitle: "Vaizey Fecal Incontinence Score",
+            instructions: [
+                "Please select one answer for each question to indicate how often you experience the following symptoms.",
+                "Never - no episodes in the past 4 weeks",
+                "Rarely - 1 episode in the past 4 weeks",
+                "Sometimes - 1 or more episodes in the past 4 weeks",
+                "Weekly - 1 or more episodes a week",
+                "Daily - 1 or more episodes a day",
+            ],
+            prompts: [
+                {
+                    text: "Lack of ability to defer defecation for 15 minutes",
+                    scaleId: "VFIS",
+                },
+            ],
+            options: [
+                ["No", 0],
+                ["Yes", 4],
             ],
         },
     ],

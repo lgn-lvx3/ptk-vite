@@ -1,15 +1,13 @@
 import { SurveyTranslationType } from "state/ISurvey/SurveyTranslationType"
-import {
-    IIQ7_SURVEY_CONFIG,
-    CRAD8_SURVEY_CONFIG,
-    POPDI6_SURVEY_CONFIG,
-    UDI6_SURVEY_CONFIG,
-    FIQL_SURVEY_CONFIG,
-    PFDI20_SURVEY_CONFIG,
-    VFIS_SURVEY_CONFIG,
-    CCFIS_SURVEY_CONFIG,
-    PFIQ7_SURVEY_CONFIG,
-} from "./SurveyConfigs"
+import { CCFIS_SURVEY_CONFIG } from "state/Surveys/CCFIS/CCFIS_SURVEY_CONFIG"
+import { CRAD8_SURVEY_CONFIG } from "state/Surveys/CRAD8/CRAD8_SURVEY_CONFIG"
+import { FIQL_SURVEY_CONFIG } from "state/Surveys/FIQL/FIQL_SURVEY_CONFIG"
+import { IIQ7_SURVEY_CONFIG } from "state/Surveys/IIQ7/IIQ7_SURVEY_CONFIG"
+import { PFDI20_SURVEY_CONFIG } from "state/Surveys/PFDI20/PFDI20_SURVEY_CONFIG"
+import { PFIQ7_SURVEY_CONFIG } from "state/Surveys/PFIQ/PFIQ7_SURVEY_CONFIG"
+import { POPDI6_SURVEY_CONFIG } from "state/Surveys/POPDI6/POPDI6_SURVEY_CONFIG"
+import { UDI6_SURVEY_CONFIG } from "state/Surveys/UDI6/UDI6_SURVEY_CONFIG"
+import { VFIS_SURVEY_CONFIG } from "state/Surveys/VFIS/VFIS_SURVEY_CONFIG"
 
 const en: SurveyTranslationType = {
     hero: {
