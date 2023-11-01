@@ -18,6 +18,7 @@ interface Props {
 }
 export const BaseSurveyPage: React.FC<Props> = ({ name }) => {
     const language = useTrackedStore().preferences.language()
+    const reset = actions.app.reset
 
     const handleSurveyChange = (name: SurveyNavTitles) => {
         switch (name) {
@@ -57,6 +58,7 @@ export const BaseSurveyPage: React.FC<Props> = ({ name }) => {
     }
 
     useEffect(() => {
+        reset()
         handleSurveyChange(name)
     }, [name, language])
 

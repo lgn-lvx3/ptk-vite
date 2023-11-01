@@ -151,3 +151,10 @@ export const AppStore = createStore("App")(
             } else return false
         },
     }))
+    .extendActions((set, get, api) => ({
+        reset: () => {
+            set.state((state) => {
+                Object.assign(state, initialState)
+            })
+        },
+    }))
