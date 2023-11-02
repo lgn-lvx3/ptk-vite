@@ -1,3 +1,14 @@
+#### 0.2.12 (2023-11-02)
+
+##### New Features
+
+* **ux:**  reset survey on page change (8d698b02)
+* **test:**  impl of PFDI and VFIS unit testing, 96 total (b93e1c52)
+
+##### Bug Fixes
+
+* **survey:**  impl of PFDI20 with sub architecture (ab6133c2)
+
 #### 0.2.11 (2023-10-17)
 
 ##### Bug Fixes
